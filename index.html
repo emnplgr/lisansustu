@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selçuk Üniversitesi Sosyal Bilimler Enstitüsü - Felsefe Anabilim Dalı Lisansüstü Portalı</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.js"></script>
+
+  <style>
+    :root {
+      --primary: #154734;
+      --primary-dark: #0a251a;
+      --primary-light: #e8f0ea;
+      --accent: #af8330;
+      --accent-dark: #8f6a24;
+      --accent-soft: #f7f1e2;
+      --slate-900: #201c14;
+      --slate-800: #322c22;
+      --slate-700: #4a4336;
+      --slate-600: #665e4e;
+      --slate-500: #857c69;
+      --slate-300: #d8d0bd;
+      --slate-200: #e6e0d1;
+      --slate-100: #efeadd;
+      --slate-50: #f7f4ea;
+      --white: #fffdf8;
+      --danger: #a5321f;
+      --status-success: #15803d;
+      --status-warning: #b8720a;
+      --radius-lg: 14px;
+      --radius-md: 8px;
+      --radius-sm: 6px;
+      --shadow-sm: 0 1px 2px rgba(32,28,20,0.07);
+      --shadow-md: 0 8px 24px -6px rgba(32,28,20,0.14);
+      --header-bg: rgba(255, 255, 255, 0.95);
+    }
+    input, select, textarea { background: var(--white); color: var(--slate-800); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Public Sans', sans-serif;
+      background-color: var(--slate-50);
+      /* Statik SVG karo (canlı CSS gradyanı yerine) — kaydırırken yeniden boyama maliyeti çok daha düşük */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23154734' fill-opacity='0.08'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      color: var(--slate-800);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* Header */
+    .header { position: sticky; top: 0; z-index: 100; background: var(--header-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--slate-200); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0.85rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .brand-logo { width: 42px; height: 42px; border-radius: 50%; background: var(--primary-light); display: flex; align-items: center; justify-content: center; color: var(--primary); flex-shrink: 0; }
+    .brand-text h1 { font-size: 0.95rem; font-weight: 800; color: var(--primary); line-height: 1.2; }
+    .brand-text p { font-size: 0.76rem; color: var(--slate-500); font-weight: 500; }
+
+    .view-switcher { display: flex; gap: 0.3rem; background: var(--slate-100); padding: 4px; border-radius: 999px; }
+    .view-btn { display: flex; align-items: center; gap: 6px; padding: 0.5rem 1.1rem; border: none; border-radius: 999px; background: transparent; color: var(--slate-600); font-family: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.15s ease; }
+    .view-btn.active { background: var(--primary); color: #fff; box-shadow: var(--shadow-sm); }
+    .view-btn:hover:not(.active) { color: var(--slate-900); }
+    .view-btn.doktora-btn.active { background: var(--accent-dark); }
+
+    /* Sticky subnav */
+    .sticky-subnav { position: sticky; top: 66px; z-index: 80; background: var(--header-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--slate-200); box-shadow: 0 4px 12px -4px rgba(15,23,42,0.04); }
+    .subnav-inner { max-width: 1200px; margin: 0 auto; padding: 0.6rem 1.5rem; display: flex; gap: 0.4rem; overflow-x: auto; justify-content: center; scrollbar-width: none; }
+    .subnav-inner::-webkit-scrollbar { display: none; }
+    .subnav-btn { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 0.5rem 0.9rem; border-radius: 999px; border: 1px solid transparent; background: transparent; color: var(--slate-600); font-size: 0.82rem; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.15s ease; }
+    .subnav-btn:hover { background: var(--slate-100); color: var(--slate-800); }
+    .subnav-btn.active { background: var(--primary-light); color: var(--primary); border-color: rgba(21,71,52,0.2); }
+
+    /* Hero */
+    .hero { position: relative; background: radial-gradient(ellipse 60% 90% at 50% -10%, rgba(196,154,69,0.16), transparent 65%), linear-gradient(155deg, var(--primary-dark) 0%, var(--primary) 100%); color: var(--white); padding: 3.5rem 1.5rem 3rem; text-align: center; border-bottom: 1px solid rgba(196,154,69,0.55); box-shadow: inset 0 -4px 0 -3px rgba(196,154,69,0.35); }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 0.3rem 0.85rem; background: transparent; border: 1px solid rgba(252,232,169,0.45); border-radius: 999px; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.02em; color: #f0d8a0; margin-bottom: 1.1rem; }
+    .hero h2 { font-family: 'Source Serif 4', serif; font-size: 2.35rem; font-weight: 600; color: #ffffff; margin-bottom: 0.6rem; letter-spacing: -0.01em; max-width: 780px; margin-inline: auto; }
+    .hero p.hero-sub { font-size: 1.02rem; color: #d9c088; font-family: 'Source Serif 4', serif; font-style: italic; max-width: 620px; margin: 0 auto; }
+    .hero-deadline-badge {
+      display: inline-flex; align-items: center; gap: 7px; margin-top: 1.1rem;
+      padding: 0.5rem 1.1rem; border-radius: 999px; background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(252,232,169,0.4); color: #fce8a9; font-size: 0.82rem; font-weight: 700;
+    }
+
+    /* Yazdırma raporu (Tez Sürecim) */
+    .print-only { display: none; }
+    @media print {
+      body * { visibility: hidden; }
+      .print-only, .print-only * { visibility: visible; }
+      .print-only { display: block; position: absolute; left: 0; top: 0; width: 100%; padding: 24px; }
+      .print-only h2 { font-family: 'Source Serif 4', serif; font-size: 1.4rem; margin-bottom: 4px; color: #111; }
+      .print-only .pr-meta { font-size: 0.85rem; color: #444; margin-bottom: 16px; }
+      .print-only h3 { font-size: 1.05rem; margin: 18px 0 8px; color: #111; }
+      .print-only table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.82rem; }
+      .print-only th, .print-only td { border: 1px solid #999; padding: 6px 8px; text-align: left; color: #111; }
+      .print-only th { background: #eee; }
+      .print-only .pr-note { font-size: 0.78rem; color: #555; margin-top: 12px; }
+    }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+    .tab-view-content { display: none; }
+    .tab-view-content.active { display: block; }
+
+    .section-title { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.5rem; scroll-margin-top: 130px; flex-wrap: wrap; }
+    .section-title h3 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; font-weight: 600; color: var(--slate-900); }
+    .section-badge { font-family: 'Source Serif 4', serif; font-style: italic; font-size: 0.85rem; color: var(--accent-dark); font-weight: 500; padding-right: 0.75rem; margin-right: 0.5rem; border-right: 1px solid var(--slate-300); }
+    .section-intro { font-size: 0.9rem; color: var(--slate-600); margin: -0.75rem 0 1.5rem; max-width: 720px; }
+    section.block { margin-bottom: 3.5rem; }
+
+    /* Akademik Takvim */
+    .cal-wrapper { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--slate-200); box-shadow: var(--shadow-sm); overflow: hidden; scroll-margin-top: 130px; }
+    .cal-spotlight { background: linear-gradient(135deg, #0d2f22 0%, #154734 60%, #1b5e20 100%); color: var(--white); padding: 1.75rem 2rem; position: relative; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .spotlight-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+    .spotlight-badge { display: inline-flex; align-items: center; gap: 6px; padding: 0.25rem 0.75rem; background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.5); border-radius: 999px; font-size: 0.75rem; font-weight: 800; color: #86efac; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .countdown-box { display: flex; gap: 0.75rem; align-items: center; background: rgba(0, 0, 0, 0.25); padding: 0.85rem 1.25rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); }
+    .countdown-item { text-align: center; min-width: 45px; }
+    .cd-num { font-size: 1.5rem; font-weight: 800; color: #fce8a9; font-variant-numeric: tabular-nums; }
+    .cd-lbl { font-size: 0.68rem; text-transform: uppercase; color: #94a3b8; font-weight: 700; }
+    .cd-sep { font-size: 1.3rem; font-weight: 700; color: rgba(255, 255, 255, 0.3); margin-top: -10px; }
+    .cal-toolbar { padding: 1rem 1.5rem; background: var(--slate-50); border-bottom: 1px solid var(--slate-200); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .sem-switch { display: flex; background: var(--slate-200); padding: 4px; border-radius: 10px; }
+    .sem-btn { border: none; background: transparent; padding: 0.45rem 1.1rem; border-radius: 8px; font-size: 0.84rem; font-weight: 700; color: var(--slate-600); cursor: pointer; transition: all 0.2s; font-family: inherit; }
+    .sem-btn.active { background: var(--white); color: var(--primary); box-shadow: var(--shadow-sm); }
+    .filter-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .f-pill { background: var(--white); border: 1px solid var(--slate-200); padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; color: var(--slate-600); cursor: pointer; transition: all 0.2s; font-family: inherit; }
+    .f-pill:hover, .f-pill.active { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .timeline-container { padding: 1.75rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.1rem; }
+    .t-card { border: 1px solid var(--slate-200); border-radius: var(--radius-md); background: var(--white); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
+    .t-card:hover { border-color: var(--slate-300); box-shadow: var(--shadow-md); }
+    .t-card.state-ongoing { border-left: 5px solid #16a34a; background: var(--primary-light); }
+    .t-card.state-next { border-left: 5px solid var(--accent); background: var(--accent-soft); }
+    .t-card.state-past { opacity: 0.7; background: var(--slate-100); }
+    .t-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 0.75rem; }
+    .t-card-cat { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+    .cat-kayit { background: #e0e7ff; color: #3730a3; }
+    .cat-ders { background: #dcfce7; color: #166534; }
+    .cat-sinav { background: #fee2e2; color: #991b1b; }
+    .cat-onay { background: #fef3c7; color: #92400e; }
+    .t-card-title { font-size: 0.98rem; font-weight: 700; color: var(--slate-900); margin-bottom: 0.4rem; line-height: 1.35; }
+    .t-card-date { font-size: 0.83rem; color: var(--slate-600); display: flex; align-items: center; gap: 6px; }
+    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+    .dot-green { background: #22c55e; }
+    .dot-amber { background: #f59e0b; }
+    .dot-gray { background: #94a3b8; }
+
+    /* Program özet çubuğu */
+    .program-stat-bar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.65rem; }
+    @media(max-width: 900px) { .program-stat-bar { grid-template-columns: repeat(3, 1fr); } }
+    @media(max-width: 560px) { .program-stat-bar { grid-template-columns: repeat(2, 1fr); } }
+    .psb-item {
+      background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-md);
+      padding: 0.85rem 0.7rem; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 8px;
+    }
+    .psb-item-icon {
+      width: 30px; height: 30px; border-radius: 8px; background: var(--primary-light); color: var(--primary);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .program-stat-bar.doktora-stats .psb-item-icon { background: var(--accent-soft); color: var(--accent-dark); }
+    .psb-item span { display: block; font-size: 0.68rem; color: var(--slate-500); font-weight: 600; margin-bottom: 2px; line-height: 1.3; }
+    .psb-item strong { font-size: 0.87rem; color: var(--slate-900); font-weight: 800; line-height: 1.3; }
+
+    /* Tablo */
+    .table-container { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--slate-200); overflow: hidden; box-shadow: var(--shadow-sm); }
+    table.data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    table.data-table th { background: var(--slate-50); color: var(--slate-700); font-weight: 700; text-align: left; padding: 0.8rem 1.1rem; border-bottom: 1px solid var(--slate-200); white-space: nowrap; }
+    table.data-table td { padding: 0.85rem 1.1rem; border-bottom: 1px solid var(--slate-100); color: var(--slate-800); vertical-align: top; }
+    table.data-table tr:last-child td { border-bottom: none; }
+    .table-scroll { overflow-x: auto; }
+    .tag-pill { display: inline-block; padding: 0.22rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 700; }
+    .pill-green { background: #e6f7ef; color: #0d7240; }
+    .pill-amber { background: #fff8e5; color: #946400; }
+    .pill-blue { background: #eef4ff; color: #2458ca; }
+    .pill-gray { background: var(--slate-100); color: var(--slate-500); }
+
+    /* Süreç diyagramı (stepper) */
+    .process-flow-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); padding: 1.5rem 1.4rem; box-shadow: var(--shadow-sm); }
+    .process-steps { list-style: none; }
+    .process-step {
+      position: relative; padding: 14px 16px 14px 58px; margin-bottom: 2px; border-radius: 10px;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
+      transition: background 0.15s ease;
+    }
+    .process-step:hover { background: var(--slate-50); }
+    .process-step::before {
+      content: ""; position: absolute; left: 33px; top: 52px; bottom: -2px; width: 2px;
+      background: linear-gradient(var(--slate-300), var(--slate-200));
+    }
+    .process-step:last-child::before { display: none; }
+    .process-step-num {
+      position: absolute; left: 16px; top: 14px; width: 34px; height: 34px; border-radius: 50%;
+      background: var(--primary-light); color: var(--primary); box-shadow: 0 0 0 2px var(--primary);
+      display: flex; align-items: center; justify-content: center; z-index: 1; flex-shrink: 0;
+    }
+    .process-step-num i { width: 16px; height: 16px; }
+    .doktora-flow .process-step-num { background: var(--accent-soft); color: var(--accent-dark); box-shadow: 0 0 0 2px var(--accent-dark); }
+    .process-step-main { flex: 1 1 260px; min-width: 220px; }
+    .process-step-title { font-family: 'Source Serif 4', serif; font-size: 0.98rem; font-weight: 600; color: var(--slate-900); margin-bottom: 3px; }
+    .process-step-desc { font-size: 0.8rem; color: var(--slate-600); line-height: 1.55; }
+    .process-step-dur { display: inline-block; margin-top: 6px; font-size: 0.68rem; font-weight: 700; color: var(--accent-dark); background: var(--accent-soft); padding: 2px 8px; border-radius: 999px; }
+    .doktora-flow .process-step-dur { color: var(--primary); background: var(--primary-light); }
+    .process-step-forms { flex: 0 1 300px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; align-content: flex-start; padding-top: 2px; }
+    .process-form-chip {
+      display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-weight: 700;
+      padding: 3px 9px 3px 7px; border-radius: 999px; background: #eaf2fd; color: #1d5fbf; text-decoration: none;
+    }
+    .process-form-chip:hover { filter: brightness(0.95); }
+    .process-form-chip.optional { background: var(--slate-100); color: var(--slate-500); }
+    .process-form-chip i { width: 11px; height: 11px; flex-shrink: 0; }
+    @media(max-width: 700px) {
+      .process-step { flex-direction: column; padding-left: 50px; }
+      .process-step-forms { justify-content: flex-start; flex-basis: auto; }
+      .process-form-chip { font-size: 0.66rem; padding: 3px 8px 3px 6px; }
+      .process-step-num { left: 8px; }
+      .process-step::before { left: 25px; }
+    }
+
+    /* İlerleme takibi ve zaman çizelgesi */
+    .progress-tracker-card, .timeline-calc-card {
+      background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-lg);
+      padding: 1.4rem 1.6rem; box-shadow: var(--shadow-sm); margin-bottom: 1.25rem;
+    }
+    .progress-bar-track { height: 10px; background: var(--slate-100); border-radius: 999px; overflow: hidden; margin-bottom: 0.5rem; }
+    .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); border-radius: 999px; transition: width 0.3s ease; }
+    .progress-bar-label { font-size: 0.8rem; font-weight: 700; color: var(--slate-600); text-align: right; margin-bottom: 1.1rem; }
+    .milestone-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .milestone-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.65rem 0.9rem; border: 1px solid var(--slate-100); border-radius: var(--radius-sm); cursor: pointer; }
+    .milestone-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); margin-right: 10px; flex-shrink: 0; }
+    .progress-tracker-card.doktora-progress input[type="checkbox"] { accent-color: var(--accent-dark); }
+    .milestone-label { font-size: 0.85rem; font-weight: 600; color: var(--slate-800); flex: 1; }
+    .milestone-note-row { padding: 0 0.9rem 0.5rem; margin-top: -0.35rem; }
+    .milestone-note-input { width: 100%; padding: 0.4rem 0.6rem; border: 1.5px solid var(--slate-200); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.78rem; color: var(--slate-700); }
+    .milestone-counter { display: flex; align-items: center; gap: 8px; }
+    .milestone-counter button {
+      width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--slate-300);
+      background: var(--slate-50); font-size: 1rem; font-weight: 700; cursor: pointer; color: var(--slate-700);
+      font-family: inherit; line-height: 1;
+    }
+    .milestone-counter span { font-size: 0.85rem; font-weight: 700; min-width: 44px; text-align: center; }
+    .timeline-calc-card h4 { font-size: 0.98rem; font-weight: 800; color: var(--slate-900); margin-bottom: 0.9rem; }
+    .timeline-inputs { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .timeline-inputs .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .timeline-inputs label { font-size: 0.76rem; font-weight: 700; color: var(--slate-600); }
+    .timeline-inputs input { padding: 0.5rem 0.7rem; border: 1.5px solid var(--slate-200); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.85rem; width: 190px; }
+    .timeline-note { font-size: 0.76rem; color: var(--slate-500); margin-top: 0.9rem; }
+
+    /* TİK / Yeterlik pencere göstergeleri */
+
+    /* Faydalı Bağlantılar */
+    .useful-link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.1rem; }
+    .useful-link-card {
+      display: flex; align-items: flex-start; gap: 12px; background: var(--white); border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md); padding: 1.1rem 1.25rem; text-decoration: none; transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    .useful-link-card:hover { box-shadow: var(--shadow-md); border-color: rgba(21,71,52,0.25); }
+    .useful-link-icon { width: 38px; height: 38px; border-radius: 9px; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .useful-link-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--slate-900); margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+    .useful-link-card h4 i { width: 13px; height: 13px; color: var(--slate-400); }
+    .useful-link-card p { font-size: 0.79rem; color: var(--slate-600); line-height: 1.5; }
+
+    /* Kural kutuları */
+    .rule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.1rem; }
+    .rule-box { background: var(--white); border: 1px solid var(--slate-200); border-left: 4px solid var(--primary); border-radius: var(--radius-md); padding: 1.1rem 1.25rem; }
+    .rule-box.accent-rule { border-left-color: var(--accent); }
+    .rule-box.danger-rule { border-left-color: var(--danger); }
+    .rule-box h4 { display: flex; align-items: center; gap: 8px; font-size: 0.92rem; font-weight: 700; color: var(--slate-900); margin-bottom: 0.5rem; }
+    .rule-box h4 i { width: 17px; height: 17px; color: var(--primary); flex-shrink: 0; }
+    .rule-box.accent-rule h4 i { color: var(--accent-dark); }
+    .rule-box.danger-rule h4 i { color: var(--danger); }
+    .rule-box p { font-size: 0.83rem; color: var(--slate-600); line-height: 1.65; }
+    .rule-box p strong { color: var(--slate-800); }
+    .rule-box .madde-ref { display: block; margin-top: 0.5rem; font-size: 0.72rem; color: var(--slate-400); font-weight: 600; }
+
+    /* Dilekçe kartları (bilgi amaçlı) */
+    .petition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.1rem; }
+    .petition-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 1.2rem 1.3rem; }
+    .petition-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem; }
+    .petition-card-top i { width: 18px; height: 18px; color: var(--accent-dark); flex-shrink: 0; }
+    .petition-card-top h4 { font-size: 0.92rem; font-weight: 700; color: var(--slate-900); }
+    .petition-card p { font-size: 0.82rem; color: var(--slate-600); margin-bottom: 0.7rem; }
+    .petition-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .petition-meta span { font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--slate-100); color: var(--slate-600); }
+
+    /* Gerçek form indirme listesi */
+    .doc-form-note { font-size: 0.82rem; color: var(--slate-600); margin-bottom: 1.2rem; background: var(--accent-soft); border: 1px solid rgba(175,131,48,0.25); border-radius: var(--radius-md); padding: 0.8rem 1.1rem; }
+    .doc-form-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .doc-form-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 0.9rem 1.1rem; }
+    .doc-form-row-title { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; font-weight: 700; color: var(--slate-900); }
+    .doc-form-row-title .doc-num { width: 22px; height: 22px; border-radius: 50%; background: var(--slate-100); color: var(--slate-600); font-size: 0.7rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .doc-form-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .doc-form-btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.4rem 0.85rem; border-radius: 999px; font-size: 0.76rem; font-weight: 700; text-decoration: none; }
+    .doc-form-btn.word { background: #eaf2fd; color: #1d5fbf; }
+    .doc-form-btn.pdf { background: #fdecea; color: #c0392b; }
+    .doc-form-btn:hover { filter: brightness(0.95); }
+    .doc-form-docs-toggle {
+      cursor: pointer; list-style: none; display: flex; align-items: center; gap: 5px;
+      font-size: 0.7rem; font-weight: 700; color: var(--primary); margin-top: 6px;
+    }
+    .doc-form-docs-toggle::-webkit-details-marker { display: none; }
+    .doc-form-docs-toggle .docs-chev { width: 12px; height: 12px; transition: transform 0.15s ease; }
+    details[open] > .doc-form-docs-toggle .docs-chev { transform: rotate(180deg); }
+    .doc-form-docs-body { margin-top: 6px; padding: 0.7rem 0.9rem; background: var(--slate-50); border-radius: 8px; font-size: 0.76rem; color: var(--slate-700); }
+    .doc-form-docs-body ul { margin: 0 0 0.5rem 1.1rem; padding: 0; }
+    .doc-form-docs-body li { margin-bottom: 2px; }
+    .doc-form-docs-body .docs-note { color: var(--accent-dark); font-weight: 600; }
+    .doc-form-row.highlight-pulse { animation: formHighlightPulse 1.8s ease; }
+    @keyframes formHighlightPulse {
+      0% { background: var(--accent-soft); border-color: var(--accent); }
+      100% { background: var(--white); border-color: var(--slate-200); }
+    }
+
+    /* SSS */
+    .faq-search-wrap { display: flex; align-items: center; gap: 0.6rem; background: var(--white); border: 1.5px solid var(--slate-200); border-radius: var(--radius-md); padding: 0.7rem 1rem; margin-bottom: 1.25rem; color: var(--slate-500); }
+    .faq-search-wrap input { flex: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 0.88rem; color: var(--slate-800); }
+    .faq-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .faq-category-label { font-size: 0.7rem; font-weight: 700; color: var(--accent-dark); text-transform: uppercase; letter-spacing: 0.03em; margin: 0.9rem 0 0.15rem; }
+    .faq-category-label:first-child { margin-top: 0; }
+    .faq-item { background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-md); overflow: hidden; }
+    .faq-item > summary { cursor: pointer; list-style: none; padding: 0.9rem 1.1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-weight: 700; color: var(--slate-900); font-size: 0.89rem; }
+    .faq-item > summary::-webkit-details-marker { display: none; }
+    .faq-item > summary::after { content: "+"; font-size: 1.1rem; color: var(--slate-500); font-weight: 400; flex-shrink: 0; }
+    .faq-item[open] > summary::after { content: "\2013"; }
+    .faq-answer { padding: 0.1rem 1.1rem 1rem; font-size: 0.85rem; color: var(--slate-600); line-height: 1.65; border-top: 1px solid var(--slate-100); padding-top: 0.8rem; }
+    .faq-answer strong { color: var(--slate-800); }
+    .faq-empty-state { text-align: center; color: var(--slate-500); font-size: 0.88rem; padding: 2rem 0; }
+
+    footer { text-align: center; padding: 2rem 1.5rem; font-size: 0.78rem; color: var(--slate-500); border-top: 1px solid var(--slate-200); }
+
+    @media(max-width: 768px) {
+      .hero h2 { font-size: 1.85rem; }
+      .header-inner { flex-direction: column; gap: 10px; }
+      .sticky-subnav { top: 112px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="brand">
+        <div class="brand-logo"><i data-lucide="award"></i></div>
+        <div class="brand-text">
+          <h1>Selçuk Üniversitesi</h1>
+          <p>Sosyal Bilimler Enstitüsü · Felsefe Anabilim Dalı</p>
+        </div>
+      </a>
+      <div class="view-switcher">
+        <button class="view-btn active" id="btnViewYL" onclick="switchMainView('yl')">
+          <i data-lucide="book-marked" style="width:16px;height:16px;"></i> Yüksek Lisans
+        </button>
+        <button class="view-btn doktora-btn" id="btnViewDoktora" onclick="switchMainView('doktora')">
+          <i data-lucide="microscope" style="width:16px;height:16px;"></i> Doktora
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sticky-subnav" aria-label="Bölüm Gezintisi">
+    <div class="subnav-inner" id="subnavContainer"></div>
+  </nav>
+
+  <section class="hero">
+    <div class="badge"><i data-lucide="shield-check" style="width:15px;height:15px;"></i> Lisansüstü Eğitim ve Öğretim Yönetmeliği'ne göre hazırlanmıştır</div>
+    <h2 id="heroTitle">Yüksek Lisans Akademik Kılavuzu</h2>
+    <p class="hero-sub" id="heroSub">Süreler, ders yükü, not sistemi, tez süreci ve formlar tek sayfada</p>
+    <div id="heroDeadlineBadge" class="hero-deadline-badge" style="display:none;"></div>
+  </section>
+
+  <main>
+    <!-- ================= AKADEMİK TAKVİM (paylaşılan, her iki sekmeden erişilir) ================= -->
+    <section class="block" id="akademik-takvim">
+      <div class="section-title"><span class="section-badge">Resmî takvim</span><h3>2026 - 2027 Lisansüstü Akademik Takvimi</h3></div>
+      <p class="section-intro">Tezli Yüksek Lisans, II. Öğretim Tezli Yüksek Lisans ve Doktora için enstitünün resmî akademik takvimi (Tezsiz programlar hariç).</p>
+
+      <div class="cal-wrapper">
+        <div class="cal-spotlight">
+          <div class="spotlight-inner">
+            <div>
+              <div id="spotlightBadge" class="spotlight-badge">
+                <span class="status-dot dot-green"></span>
+                <span id="spotlightTagText">Şu An Devam Ediyor / Kritik</span>
+              </div>
+              <h4 id="spotlightName" style="font-size:1.4rem; font-weight:800;">Danışman Onayları</h4>
+              <div id="spotlightDate" style="font-size:0.92rem; color:#cbd5e1; margin-top:4px; display:flex; align-items:center; gap:6px;">
+                <i data-lucide="calendar" style="width:16px;height:16px;"></i>
+                <span>7 - 16 Eylül 2026</span>
+              </div>
+            </div>
+            <div class="countdown-box">
+              <div class="countdown-item"><div class="cd-num" id="cdDays">00</div><div class="cd-lbl">Gün</div></div>
+              <div class="cd-sep">:</div>
+              <div class="countdown-item"><div class="cd-num" id="cdHours">00</div><div class="cd-lbl">Saat</div></div>
+              <div class="cd-sep">:</div>
+              <div class="countdown-item"><div class="cd-num" id="cdMinutes">00</div><div class="cd-lbl">Dakika</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cal-toolbar">
+          <div class="sem-switch">
+            <button class="sem-btn active" id="btnSemGuz" onclick="changeSemester('guz')">Güz Yarıyılı</button>
+            <button class="sem-btn" id="btnSemBahar" onclick="changeSemester('bahar')">Bahar Yarıyılı</button>
+          </div>
+          <div class="filter-pills">
+            <button class="f-pill active" onclick="applyFilter('all', this)">Tümü</button>
+            <button class="f-pill" onclick="applyFilter('kayit', this)">Kayıt & Onay</button>
+            <button class="f-pill" onclick="applyFilter('ders', this)">Ders Başlangıç / Bitiş</button>
+            <button class="f-pill" onclick="applyFilter('sinav', this)">Sınavlar & Finaller</button>
+          </div>
+        </div>
+
+        <div class="timeline-container" id="timelineGrid"></div>
+      </div>
+      <p class="timeline-note" style="margin-top: 0.75rem;">TİK dönemleri (Mart-Haziran / Eylül-Aralık) ve yeterlik sınavı pencereleri (Nisan-Mayıs / Ekim-Kasım) enstitünün genel takviminde ayrıca yer almaz; bu tarihler Tez Sürecim bölümündeki zaman çizelgesinde hesaplanır.</p>
+    </section>
+
+    <!-- ================= YÜKSEK LİSANS ================= -->
+    <div id="viewYL" class="tab-view-content active">
+
+      <section class="block" id="program-bilgisi-yl">
+        <div class="section-title"><span class="section-badge">Programa genel bakış</span><h3>Program Bilgisi</h3></div>
+        <p class="section-intro">Tezli Yüksek Lisans programının süre, ders yükü ve mezuniyet şartları özeti.</p>
+        <div class="program-stat-bar">
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="calendar-clock"></i></div><span>Normal / Azami Süre</span><strong>4 / 6 yarıyıl</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="book-open"></i></div><span>Ders Yükü</span><strong>En az 7 ders + Seminer</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="layers"></i></div><span>Toplam Kredi</span><strong>En az 21 kredi</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="percent"></i></div><span>Toplam AKTS</span><strong>En az 120 AKTS</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="gauge"></i></div><span>Dönem Yükü</span><strong>30 AKTS/dönem</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="check-circle-2"></i></div><span>Ders Geçme Notu</span><strong>En az CB</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="target"></i></div><span>Mezuniyet GANO</span><strong>En az 2,50</strong></div>
+        </div>
+      </section>
+
+      <section class="block" id="surec-yl">
+        <div class="section-title"><span class="section-badge">Yol haritası</span><h3>Süreç Diyagramı</h3></div>
+        <p class="section-intro">Danışman atamasından diploma teslimine kadar izlenen sıra.</p>
+        <div class="process-flow-card yl-flow">
+          <ol class="process-steps">
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="user-check"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Kayıt ve Danışman Ataması</div>
+                <div class="process-step-desc">Kesin kayıt sonrası, EAB kurulu en geç 1 hafta içinde danışman önerir.</div>
+                <span class="process-step-dur">Madde 14/2</span>
+              </div>
+              <div class="process-step-forms">
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('yl', 11); return false;"><i data-lucide="file-text"></i>Kesin Kayıt Formu</a>
+                <a class="process-form-chip optional" href="javascript:void(0)" onclick="scrollToForm('yl', 9); return false;"><i data-lucide="file-text"></i>Danışman Değişiklik Formu (gerekirse)</a>
+              </div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="book-open"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Ders Dönemi ve Seminer</div>
+                <div class="process-step-desc">En az 7 ders alınır; dönem başına 30 AKTS. Tez öncesinde ayrıca bir seminer hazırlanıp savunulur.</div>
+                <span class="process-step-dur">Madde 26</span>
+              </div>
+              <div class="process-step-forms">
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('yl', 7); return false;"><i data-lucide="file-text"></i>Ders Ekleme - Çıkarma Formu</a>
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('yl', 8); return false;"><i data-lucide="file-text"></i>Seminer Değerlendirme Formu</a>
+                <a class="process-form-chip optional" href="javascript:void(0)" onclick="scrollToForm('yl', 6); return false;"><i data-lucide="file-text"></i>Ders Muafiyet Formu (gerekirse)</a>
+              </div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="file-edit"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Tez Konusunun Belirlenmesi</div>
+                <div class="process-step-desc">Danışmanla birlikte hazırlanan tez önerisi EAB başkanlığına, oradan enstitüye sunulur.</div>
+                <span class="process-step-dur">Madde 28</span>
+              </div>
+              <div class="process-step-forms"><a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('yl', 0); return false;"><i data-lucide="file-text"></i>Tez Önerisi Formu</a></div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="pen-line"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Tez Yazımı ve Danışman Onayı</div>
+                <div class="process-step-desc">Tamamlanan tez, intihal raporuyla birlikte danışman onayından geçerek enstitüye teslim edilir.</div>
+                <span class="process-step-dur">Madde 29/c</span>
+              </div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="gavel"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Tez Savunması</div>
+                <div class="process-step-desc">5 kişilik jüri önünde sözlü savunma yapılır; süre en fazla 90 dakikadır.</div>
+                <span class="process-step-dur">Madde 29/d-e</span>
+              </div>
+              <div class="process-step-forms">
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('yl', 1); return false;"><i data-lucide="file-text"></i>Jüri Öneri Formu</a>
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('yl', 2); return false;"><i data-lucide="file-text"></i>Savunma ve Tutanak Formu</a>
+                <a class="process-form-chip optional" href="javascript:void(0)" onclick="scrollToForm('yl', 3); return false;"><i data-lucide="file-text"></i>Düzeltme Savunma Başvurusu (gerekirse)</a>
+                <a class="process-form-chip optional" href="javascript:void(0)" onclick="scrollToForm('yl', 4); return false;"><i data-lucide="file-text"></i>Başlık Değişikliği (gerekirse)</a>
+              </div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="award"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Diploma</div>
+                <div class="process-step-desc">Ciltlenmiş tez, savunmadan itibaren 1 ay içinde teslim edilir; diploma verilir.</div>
+                <span class="process-step-dur">Madde 30</span>
+              </div>
+              <div class="process-step-forms"><a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('yl', 5); return false;"><i data-lucide="file-text"></i>Mezuniyet Formları</a></div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="block" id="surecim-yl">
+        <div class="section-title"><span class="section-badge">Kişisel takip</span><h3>Tez Sürecim</h3></div>
+        <p class="section-intro">İlerlemenizi işaretleyin, kendi zaman çizelgenizi görün. Bilgiler yalnızca bu tarayıcıda saklanır; kimseyle paylaşılmaz.</p>
+
+        <div class="progress-tracker-card">
+          <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill-yl"></div></div>
+          <div class="progress-bar-label" id="progressLabel-yl">0 / 5 aşama tamamlandı</div>
+          <div class="milestone-list" id="milestoneList-yl"></div>
+        </div>
+
+        <div class="timeline-calc-card">
+          <h4>Kendi Zaman Çizelgen</h4>
+          <div class="timeline-inputs">
+            <div class="form-group">
+              <label for="enrollYear-yl">İlk Kayıt Yılı (Güz)</label>
+              <input type="number" id="enrollYear-yl" placeholder="ör. 2023" min="2000" max="2100" oninput="updateEnrollYear('yl', this.value)" />
+            </div>
+          </div>
+          <div class="table-container" style="margin-top: 1rem;">
+            <div class="table-scroll">
+              <table class="data-table"><thead><tr><th>Aşama</th><th>Yaklaşık Tarih</th></tr></thead><tbody id="timelineBody-yl"></tbody></table>
+            </div>
+          </div>
+          <p class="timeline-note">Tarihler kaba bir yıl bazlı tahmindir; kesin tarihler için enstitünün akademik takvimini esas alın.</p>
+          <div style="text-align: right; margin-top: 0.9rem;">
+            <button class="doc-form-btn word" style="cursor: pointer; border: none; font-family: inherit;" onclick="downloadSurecimReport('yl')">
+              <i data-lucide="file-down" style="width:14px;height:14px;"></i> Süreci Yazdır / PDF
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="not-sistemi-yl">
+        <div class="section-title"><span class="section-badge">Değerlendirme</span><h3>Not Sistemi</h3></div>
+        <p class="section-intro">Yüzlük not aralıkları ve harf notu karşılıkları (Madde 20).</p>
+        <div class="table-container" style="margin-bottom: 1.5rem;">
+          <div class="table-scroll">
+            <table class="data-table"><thead><tr><th>Yüzlük Aralık</th><th>Puan</th><th>Harf Notu</th><th>Açıklama</th></tr></thead>
+            <tbody id="notSistemiBody-yl"></tbody></table>
+          </div>
+        </div>
+        <div class="rule-grid">
+          <div class="rule-box"><h4><i data-lucide="check-circle-2"></i> Ders Geçme Notu</h4><p>Bir dersten başarılı sayılmak için en az <strong>CB</strong> harf notu almak gerekir.</p><span class="madde-ref">Madde 20/4</span></div>
+          <div class="rule-box accent-rule"><h4><i data-lucide="target"></i> Mezuniyet GANO Şartı</h4><p>Mezun olabilmek için genel ağırlıklı not ortalamasının en az <strong>2,50</strong> olması gerekir.</p><span class="madde-ref">Madde 20/5</span></div>
+          <div class="rule-box"><h4><i data-lucide="repeat"></i> Seçmeli Ders Başarısızlığı</h4><p>Seçmeli bir dersten başarısız olan öğrenci, isterse ve danışmanı uygun görürse izleyen dönemde bu dersin yerine başka bir ders alabilir; ancak yeni derse devam etmek zorundadır.</p><span class="madde-ref">Madde 20/10</span></div>
+        </div>
+      </section>
+
+      <section class="block" id="danisman-yl">
+        <div class="section-title"><span class="section-badge">Rehberlik ve savunma</span><h3>Danışman ve Tez Süreci</h3></div>
+        <div class="rule-grid">
+          <div class="rule-box"><h4><i data-lucide="user-check"></i> Danışman Atanması</h4><p>Danışman olabilmesi için öğretim üyesinin en az <strong>iki yarıyıl</strong> lisans veya tezli yüksek lisans programında ders vermiş olması gerekir.</p><span class="madde-ref">Madde 14/2-3</span></div>
+          <div class="rule-box"><h4><i data-lucide="gavel"></i> Tez Savunma Jürisi</h4><p>Jüri, danışman dahil <strong>3 asıl + 2 yedek</strong> üyeden (biri kurum dışından) oluşur. Savunma süresi en fazla <strong>90 dakikadır</strong>.</p><span class="madde-ref">Madde 29/ç-d</span></div>
+          <div class="rule-box danger-rule"><h4><i data-lucide="shield-alert"></i> İntihal Kontrolü</h4><p>Danışman, savunulabilir bulduğu tezi intihal yazılım raporuyla birlikte enstitüye teslim eder; rapor jüri üyelerine gönderilir.</p><span class="madde-ref">Madde 29/c</span></div>
+        </div>
+      </section>
+
+      <section class="block" id="yazim-yl">
+        <div class="section-title"><span class="section-badge">Biçim ve içerik</span><h3>Tez Hazırlama ve Yazma Kılavuzu</h3></div>
+        <p class="section-intro">Enstitünün "Tez Hazırlama ve Yazma Kılavuzu"na dayanır; yüksek lisans, ikinci öğretim tezli yüksek lisans ve doktora tezleri için geçerlidir.</p>
+        <div class="rule-grid">
+          <div class="rule-box"><h4><i data-lucide="file-stack"></i> Kağıt ve Biçim</h4><p>A4, 1. hamur beyaz kağıt; dış kapak beyaz Amerikan Bristol karton (240 gr/m²). Kenar boşlukları: üst/alt 3 cm, sol 4 cm, sağ 2,5 cm. Yazı tipi <strong>Times New Roman, 12 punto</strong>, satır aralığı <strong>1,5</strong>, paragraf iki yana yaslı, girinti 1,25 cm.</p><span class="madde-ref">Bölüm 2.1-2.2</span></div>
+          <div class="rule-box"><h4><i data-lucide="heading-1"></i> Başlıklandırma</h4><p>Ondalık sistem (1.1, 1.1.1…) kullanılır; Giriş, Sonuç ve Kaynakça numaralandırılmaz. Bölüm başlıkları BÜYÜK HARF, koyu, ortalı ve yeni sayfadan başlar; alt başlıklar sola yaslıdır.</p><span class="madde-ref">Bölüm 2.3</span></div>
+          <div class="rule-box accent-rule"><h4><i data-lucide="quote"></i> Atıf ve Kaynakça</h4><p><strong>APA 7</strong> esas alınır; atıflar dipnot yerine metin içinde parantezle yapılır. 40 kelimeyi aşan alıntılar blok alıntı olarak ayrı paragrafta verilir. Kaynakça alfabetik sıralanır ve MS Word referans yönetim aracıyla oluşturulmalıdır.</p><span class="madde-ref">Bölüm 2.5</span></div>
+          <div class="rule-box"><h4><i data-lucide="table"></i> Tablo ve Şekiller</h4><p>Tablo/Şekil numarası ve başlığı üstte, ortalı; kelime ve numara koyu, başlık normal yazılır. Kaynak, sol alt köşede "Kaynak:" ifadesiyle 10 punto belirtilir. İki sayfadan uzun olanlar Ekler'e alınır.</p><span class="madde-ref">Bölüm 2.7</span></div>
+          <div class="rule-box"><h4><i data-lucide="save"></i> Teslim Formatı</h4><p>Tez, hem PDF hem Word formatında <strong>2 adet CD/DVD/USB</strong> olarak teslim edilir. Dosyalar "referansno_tez", "referansno_özet_tr", "referansno_özet_en" şeklinde adlandırılır.</p><span class="madde-ref">Bölüm 2.8</span></div>
+          <div class="rule-box danger-rule"><h4><i data-lucide="shield-alert"></i> İntihal ve Yapay Zekâ</h4><p>İntihal kesinlikle yasaktır; 4 satırı aşan alıntılar ayrı paragrafta, girintili ve italik yazılır. Yapay zekâ kullanımı fikir edinme ve literatür taraması ile sınırlıdır; doğrudan aktarım yapılamaz.</p><span class="madde-ref">Bölüm 3.4-3.5</span></div>
+        </div>
+
+        <div class="table-container" style="margin-top: 1.25rem;">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Ön Sayfa</th><th>Sayfa Numarası</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Dış Kapak</td><td>Numara yazılmaz</td></tr>
+                <tr><td>2</td><td>İç Kapak</td><td>(i) — verilir ama yazılmaz</td></tr>
+                <tr><td>3</td><td>YÖK Tarafından İstenen Sayfa</td><td>(ii) — verilir ama yazılmaz</td></tr>
+                <tr><td>4</td><td>Önsöz</td><td>iii</td></tr>
+                <tr><td>5</td><td>Türkçe Özet (en fazla 300 kelime)</td><td>iv</td></tr>
+                <tr><td>6</td><td>İngilizce Özet</td><td>v</td></tr>
+                <tr><td>7</td><td>İçindekiler</td><td>vi</td></tr>
+                <tr><td>8</td><td>Kısaltmalar ve Simgeler</td><td>vii</td></tr>
+                <tr><td>9</td><td>Tablolar Listesi</td><td>viii</td></tr>
+                <tr><td>10</td><td>Şekiller Listesi</td><td>ix</td></tr>
+                <tr><td>11</td><td>Ekler Listesi</td><td>x</td></tr>
+                <tr><td>12</td><td>Giriş (metin başlar)</td><td>1'den itibaren</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h4 style="font-family:'Source Serif 4', serif; font-size:0.98rem; font-weight:700; color:var(--slate-900); margin:1.75rem 0 0.75rem;">APA 7 Hızlı Referans</h4>
+        <div class="table-container">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr><th>Tür</th><th>Kaynakça Formatı</th><th>Metin İçi Örnek</th></tr></thead>
+              <tbody>
+                <tr><td>Kitap (tek yazar)</td><td>Yazar, A. (Yıl). <em>Kitap Adı</em> (Baskı). Yayınevi.</td><td>(Soyadı, Yıl)</td></tr>
+                <tr><td>Kitap (2+ yazar)</td><td>Yazar, A., Yazar, B. ve Yazar, C. (Yıl). <em>Kitap Adı</em> (Baskı). Yayınevi.</td><td>(Soyadı & Soyadı, Yıl) · 3+ yazar: (Soyadı vd., Yıl)</td></tr>
+                <tr><td>Makale</td><td>Yazar, A. (Yıl). Makale adı. <em>Dergi Adı</em>, Cilt(Sayı), sayfa-aralığı.</td><td>(Soyadı, Yıl)</td></tr>
+                <tr><td>Tez</td><td>Yazar, A. (Yıl). <em>Tezin Adı</em>. Yayınlanmamış Yüksek Lisans/Doktora Tezi, Üniversite Adı Sosyal Bilimler Enstitüsü, Yer.</td><td>(Soyadı, Yıl)</td></tr>
+                <tr><td>Elektronik Kaynak</td><td>Yazar, A. (Yıl). Yayın Adı. Elektronik adres, Erişim Tarihi.</td><td>(Soyadı, Yıl)</td></tr>
+                <tr><td>Dolaylı (İkincil) Atıf</td><td>Yalnızca doğrudan okunan (ikincil) kaynak kaynakçaya girer, aslı girmez.</td><td>(Aktaran: Soyadı, Yıl)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h4 style="font-family:'Source Serif 4', serif; font-size:0.98rem; font-weight:700; color:var(--slate-900); margin:1.75rem 0 0.75rem;">Tez Teslimi Öncesi Kontrol Listesi</h4>
+        <div class="progress-tracker-card" style="margin-bottom: 0;">
+          <div class="progress-bar-track"><div class="progress-bar-fill" id="checklistFill-yl"></div></div>
+          <div class="progress-bar-label" id="checklistLabel-yl">0 / 11 madde tamamlandı</div>
+          <div class="milestone-list" id="checklistList-yl"></div>
+        </div>
+      </section>
+
+      <section class="block" id="kurallar-yl">
+        <div class="section-title"><span class="section-badge">Yönetmelik özeti</span><h3>Diğer Önemli Kurallar</h3></div>
+        <div class="rule-grid">
+          <div class="rule-box"><h4><i data-lucide="refresh-cw"></i> Kayıt Yenileme</h4><p>Öğrenciler her dönem katkı payını ödeyerek kayıtlarını yenilemek zorundadır. Yenilemeyenler o yarıyıl ders alamaz, seminer/tez önerisi veremez.</p><span class="madde-ref">Madde 15</span></div>
+          <div class="rule-box"><h4><i data-lucide="pause-circle"></i> Kayıt Dondurma</h4><p>Hastalık, doğum, doğal afet, askerlik veya yurt dışı resmî görevlendirme nedeniyle, belgeyle başvuran öğrencinin kaydı dondurulabilir.</p><span class="madde-ref">Madde 16</span></div>
+          <div class="rule-box"><h4><i data-lucide="edit-3"></i> Ders Ekleme / Bırakma</h4><p>Danışmanın uygun görüşüyle, akademik takvimde belirtilen süreler içinde ders eklenebilir veya çıkarılabilir.</p><span class="madde-ref">Madde 17/6</span></div>
+          <div class="rule-box accent-rule"><h4><i data-lucide="scale"></i> Sınav Sonucuna İtiraz</h4><p>Notun otomasyona giriş tarihinden itibaren en geç <strong>üç iş günü</strong> içinde enstitü müdürlüğüne dilekçeyle itiraz edilebilir.</p><span class="madde-ref">Madde 22</span></div>
+          <div class="rule-box"><h4><i data-lucide="arrow-left-right"></i> Yatay Geçiş</h4><p>En az bir yarıyıl ders almış ve başarılı olmuş öğrenci, derslerin başlangıcından en az 15 iş günü önce başvurabilir. Tez teslimine 2 yarıyıldan az kalanlar başvuramaz.</p><span class="madde-ref">Madde 12</span></div>
+          <div class="rule-box danger-rule"><h4><i data-lucide="banknote"></i> Ücretli Döneme Geçiş</h4><p>Programı 4 yarıyılda bitiremeyenler, 5. yarıyıldan itibaren katkı payı ödemekle yükümlüdür.</p><span class="madde-ref">Madde 27/4</span></div>
+        </div>
+      </section>
+
+      <section class="block" id="formlar-yl">
+        <div class="section-title"><span class="section-badge">Enstitü belgeleri</span><h3>Yüksek Lisans Formları</h3></div>
+        <div class="doc-form-note"><strong>Not:</strong> Formlar bilgisayar ortamında doldurulmalıdır. "Word" bağlantısı boş formu, "Örnek PDF" bağlantısı doldurulmuş örneğini açar.</div>
+        <div class="doc-form-note" style="background: var(--primary-light); border-color: rgba(21,71,52,0.25);">
+          <strong>İmza/Paraf hakkında:</strong> Çoğu formda danışman ve ilgili jüri/kurul üyelerinin imzası zorunludur; bazı formlarda (ör. tez önerisi eki) öğrencinin kapak dahil <strong>her sayfayı imzalaması</strong> istenir. Bu, formdan forma değişebildiği için kesin kural olarak sunmuyoruz — her formun kendi imza/paraf alanlarını (genelde son sayfada bir tablo halinde) mutlaka kontrol edin.
+        </div>
+        <div class="doc-form-row" style="border-color: var(--accent); background: var(--accent-soft); margin-bottom: 1rem;">
+          <div class="doc-form-row-title"><span class="doc-num" style="background: var(--accent-dark); color: #fff;">★</span> Yüksek Lisans Tez Hazırlama Şablonu — Kapak, Ön Sayfalar, Başlık Stilleri, Kaynakça Biçimi</div>
+          <div class="doc-form-actions">
+            <a class="doc-form-btn pdf" href="assets/tez_sablonu_yuksek_lisans.pdf" target="_blank" rel="noopener"><i data-lucide="eye" style="width:14px;height:14px;"></i> Önizleme (PDF)</a>
+            <a class="doc-form-btn word" href="assets/tez_sablonu_yuksek_lisans.docx" target="_blank" rel="noopener"><i data-lucide="file-text" style="width:14px;height:14px;"></i> İndir (Word)</a>
+          </div>
+        </div>
+        <div class="faq-search-wrap">
+          <i data-lucide="search" style="width:16px;height:16px;"></i>
+          <input type="text" id="formSearchInput-yl" placeholder='Form ara (ör. "danışman", "tez adı", "mezuniyet")' oninput="filterForms('yl')" />
+        </div>
+        <div class="doc-form-list" id="ylFormsList"></div>
+        <p id="formEmptyState-yl" class="faq-empty-state" style="display:none;">Aramanızla eşleşen bir form bulunamadı.</p>
+      </section>
+
+      <section class="block" id="sss-yl">
+        <div class="section-title"><span class="section-badge">Sık sorulan sorular</span><h3>Sık Sorulan Sorular</h3></div>
+        <div class="faq-search-wrap"><i data-lucide="search" style="width:16px;height:16px;"></i><input type="text" id="faqSearchInput-yl" placeholder='Soru veya kelime ara (ör. "danışman", "AKTS")' oninput="filterFaq('yl')" /></div>
+        <div id="faqList-yl" class="faq-list"></div>
+        <p id="faqEmptyState-yl" class="faq-empty-state" style="display:none;">Aramanızla eşleşen bir soru bulunamadı.</p>
+      </section>
+
+    </div>
+
+    <!-- ================= DOKTORA ================= -->
+    <div id="viewDoktora" class="tab-view-content">
+
+      <section class="block" id="program-bilgisi-doktora">
+        <div class="section-title"><span class="section-badge">Programa genel bakış</span><h3>Program Bilgisi</h3></div>
+        <p class="section-intro">Doktora programının süre, ders yükü ve mezuniyet şartları özeti (yüksek lisans derecesiyle kabul).</p>
+        <div class="program-stat-bar doktora-stats">
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="calendar-clock"></i></div><span>Normal / Azami Süre</span><strong>8 / 12 yarıyıl</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="hourglass"></i></div><span>Ders + Seminer Azami</span><strong>4 yarıyıl</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="book-open"></i></div><span>Ders Yükü</span><strong>En az 7 ders + Uzmanlık Alan Dersi</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="layers"></i></div><span>Toplam Kredi</span><strong>En az 21 kredi</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="percent"></i></div><span>Toplam AKTS</span><strong>En az 240 AKTS</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="check-circle-2"></i></div><span>Ders Geçme Notu</span><strong>En az BB</strong></div>
+          <div class="psb-item"><div class="psb-item-icon"><i data-lucide="target"></i></div><span>Mezuniyet GANO</span><strong>En az 3,00</strong></div>
+        </div>
+      </section>
+
+      <section class="block" id="surec-doktora">
+        <div class="section-title"><span class="section-badge">Yol haritası</span><h3>Süreç Diyagramı</h3></div>
+        <p class="section-intro">Danışman atamasından diploma teslimine kadar izlenen sıra.</p>
+        <div class="process-flow-card doktora-flow">
+          <ol class="process-steps">
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="user-check"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Kayıt ve Danışman Ataması</div>
+                <div class="process-step-desc">Kesin kayıt sonrası, EAB kurulu en geç 1 hafta içinde danışman önerir.</div>
+                <span class="process-step-dur">Madde 14/2</span>
+              </div>
+              <div class="process-step-forms">
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 16); return false;"><i data-lucide="file-text"></i>Kesin Kayıt Formu</a>
+                <a class="process-form-chip optional" href="javascript:void(0)" onclick="scrollToForm('doktora', 14); return false;"><i data-lucide="file-text"></i>Danışman Değişiklik Formu (gerekirse)</a>
+              </div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="book-open"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Ders Dönemi ve Seminer</div>
+                <div class="process-step-desc">En az 7 ders, uzmanlık alan dersleri ve seminer; azami 4 yarıyılda tamamlanmalıdır.</div>
+                <span class="process-step-dur">Madde 41, 42/1-b</span>
+              </div>
+              <div class="process-step-forms">
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 12); return false;"><i data-lucide="file-text"></i>Ders Ekleme - Çıkarma Formu</a>
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 13); return false;"><i data-lucide="file-text"></i>Seminer Değerlendirme Formu</a>
+                <a class="process-form-chip optional" href="javascript:void(0)" onclick="scrollToForm('doktora', 11); return false;"><i data-lucide="file-text"></i>Ders Muafiyet Formu (gerekirse)</a>
+              </div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="calendar-search"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Yeterlik Sınavı</div>
+                <div class="process-step-desc">En geç 5. yarıyılda yazılı + sözlü sınav; yılda 2 kez (Nisan-Mayıs, Ekim-Kasım); geçme notu en az 73 (BB).</div>
+                <span class="process-step-dur">Madde 43</span>
+              </div>
+              <div class="process-step-forms">
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 0); return false;"><i data-lucide="file-text"></i>Yeterlik Başvuru Formu</a>
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 1); return false;"><i data-lucide="file-text"></i>Yeterlik Jüri Tutanağı</a>
+              </div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="users"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Tez İzleme Komitesi (TİK)</div>
+                <div class="process-step-desc">Yeterlik sonrası 1 ay içinde, danışman dahil 3 öğretim üyesinden kurulur.</div>
+                <span class="process-step-dur">Madde 44</span>
+              </div>
+              <div class="process-step-forms"><a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 2); return false;"><i data-lucide="file-text"></i>TİK Kurulma/Değiştirme Formu</a></div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="clipboard-check"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Tez Önerisi Savunması</div>
+                <div class="process-step-desc">Yeterlik sonrası en geç 6 ay içinde, TİK önünde sözlü savunma yapılır.</div>
+                <span class="process-step-dur">Madde 45</span>
+              </div>
+              <div class="process-step-forms"><a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 5); return false;"><i data-lucide="file-text"></i>Tez Önerisi Savunma Tutanağı</a></div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="file-check"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">TİK Raporları</div>
+                <div class="process-step-desc">Mart-Haziran ve Eylül-Aralık aralarında yılda 2 kez; mezuniyet için en az 3 başarılı rapor gerekir.</div>
+                <span class="process-step-dur">Madde 45/5</span>
+              </div>
+              <div class="process-step-forms">
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 3); return false;"><i data-lucide="file-text"></i>TİK Toplantı Başvurusu</a>
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 4); return false;"><i data-lucide="file-text"></i>TİK Tez İzleme Formu</a>
+              </div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="pen-line"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Tez Yazımı ve Danışman Onayı</div>
+                <div class="process-step-desc">Tamamlanan tez, intihal raporuyla birlikte danışman onayından geçerek enstitüye teslim edilir.</div>
+                <span class="process-step-dur">Madde 46/c</span>
+              </div>
+              <div class="process-step-forms"><a class="process-form-chip optional" href="javascript:void(0)" onclick="scrollToForm('doktora', 9); return false;"><i data-lucide="file-text"></i>Başlık Değişikliği (gerekirse)</a></div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="gavel"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Tez Savunması</div>
+                <div class="process-step-desc">5 kişilik jüri önünde sözlü savunma yapılır; süre en fazla 120 dakikadır.</div>
+                <span class="process-step-dur">Madde 46/d-e</span>
+              </div>
+              <div class="process-step-forms">
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 6); return false;"><i data-lucide="file-text"></i>Jüri Öneri Formu</a>
+                <a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 7); return false;"><i data-lucide="file-text"></i>Savunma Sınavı Tutanağı</a>
+                <a class="process-form-chip optional" href="javascript:void(0)" onclick="scrollToForm('doktora', 8); return false;"><i data-lucide="file-text"></i>Düzeltme Savunma Başvurusu (gerekirse)</a>
+              </div>
+            </li>
+            <li class="process-step">
+              <div class="process-step-num"><i data-lucide="award"></i></div>
+              <div class="process-step-main">
+                <div class="process-step-title">Diploma</div>
+                <div class="process-step-desc">Ciltlenmiş tez, savunmadan itibaren 1 ay içinde teslim edilir; diploma verilir.</div>
+                <span class="process-step-dur">Madde 47</span>
+              </div>
+              <div class="process-step-forms"><a class="process-form-chip" href="javascript:void(0)" onclick="scrollToForm('doktora', 10); return false;"><i data-lucide="file-text"></i>Mezuniyet Formları</a></div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="block" id="surecim-doktora">
+        <div class="section-title"><span class="section-badge">Kişisel takip</span><h3>Tez Sürecim</h3></div>
+        <p class="section-intro">İlerlemenizi işaretleyin, kendi zaman çizelgenizi görün. Bilgiler yalnızca bu tarayıcıda saklanır; kimseyle paylaşılmaz.</p>
+
+        <div class="progress-tracker-card doktora-progress">
+          <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill-doktora"></div></div>
+          <div class="progress-bar-label" id="progressLabel-doktora">0 / 9 aşama tamamlandı</div>
+          <div class="milestone-list" id="milestoneList-doktora"></div>
+        </div>
+
+        <div class="timeline-calc-card">
+          <h4>Kendi Zaman Çizelgen</h4>
+          <div class="timeline-inputs">
+            <div class="form-group">
+              <label for="enrollYear-doktora">İlk Kayıt Yılı (Güz)</label>
+              <input type="number" id="enrollYear-doktora" placeholder="ör. 2021" min="2000" max="2100" oninput="updateEnrollYear('doktora', this.value)" />
+            </div>
+            <div class="form-group">
+              <label for="yeterlikDate-doktora">Yeterlik Sınavını Geçtiğim Tarih (varsa)</label>
+              <input type="date" id="yeterlikDate-doktora" oninput="updateYeterlikDate(this.value)" />
+            </div>
+          </div>
+          <div class="table-container" style="margin-top: 1rem;">
+            <div class="table-scroll">
+              <table class="data-table"><thead><tr><th>Aşama</th><th>Yaklaşık Tarih</th></tr></thead><tbody id="timelineBody-doktora"></tbody></table>
+            </div>
+          </div>
+          <p class="timeline-note">Tarihler kaba bir yıl bazlı tahmindir; kesin tarihler için enstitünün akademik takvimini esas alın.</p>
+          <div style="text-align: right; margin-top: 0.9rem;">
+            <button class="doc-form-btn word" style="cursor: pointer; border: none; font-family: inherit;" onclick="downloadSurecimReport('doktora')">
+              <i data-lucide="file-down" style="width:14px;height:14px;"></i> Süreci Yazdır / PDF
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="block" id="not-sistemi-doktora">
+        <div class="section-title"><span class="section-badge">Değerlendirme</span><h3>Not Sistemi</h3></div>
+        <p class="section-intro">Yüzlük not aralıkları ve harf notu karşılıkları (Madde 20).</p>
+        <div class="table-container" style="margin-bottom: 1.5rem;">
+          <div class="table-scroll">
+            <table class="data-table"><thead><tr><th>Yüzlük Aralık</th><th>Puan</th><th>Harf Notu</th><th>Açıklama</th></tr></thead>
+            <tbody id="notSistemiBody-doktora"></tbody></table>
+          </div>
+        </div>
+        <div class="rule-grid">
+          <div class="rule-box"><h4><i data-lucide="check-circle-2"></i> Ders Geçme Notu</h4><p>Bir dersten başarılı sayılmak için en az <strong>BB</strong> harf notu almak gerekir.</p><span class="madde-ref">Madde 20/4</span></div>
+          <div class="rule-box accent-rule"><h4><i data-lucide="target"></i> Mezuniyet GANO Şartı</h4><p>Mezun olabilmek için genel ağırlıklı not ortalamasının en az <strong>3,00</strong> olması gerekir.</p><span class="madde-ref">Madde 20/5</span></div>
+          <div class="rule-box"><h4><i data-lucide="repeat"></i> Seçmeli Ders Başarısızlığı</h4><p>Seçmeli bir dersten başarısız olan öğrenci, isterse ve danışmanı uygun görürse izleyen dönemde bu dersin yerine başka bir ders alabilir; ancak yeni derse devam etmek zorundadır.</p><span class="madde-ref">Madde 20/10</span></div>
+        </div>
+      </section>
+
+      <section class="block" id="danisman-doktora">
+        <div class="section-title"><span class="section-badge">Rehberlik ve savunma</span><h3>Danışman ve Tez Süreci</h3></div>
+        <div class="rule-grid">
+          <div class="rule-box"><h4><i data-lucide="user-check"></i> Danışman Atanması</h4><p>Danışman olabilmesi için öğretim üyesinin en az <strong>dört yarıyıl</strong> lisans veya <strong>iki yarıyıl</strong> tezli yüksek lisansta ders vermiş olması ve en az bir yüksek lisans tezini tamamlatmış olması gerekir.</p><span class="madde-ref">Madde 14/3</span></div>
+          <div class="rule-box"><h4><i data-lucide="calendar-search"></i> Yeterlik Sınavı</h4><p>Ders ve seminerini tamamlayan öğrenci en geç <strong>5. yarıyılda</strong> yazılı ve sözlü aşamalardan oluşan yeterlik sınavına girer; geçme notu en az 73 (BB).</p><span class="madde-ref">Madde 43</span></div>
+          <div class="rule-box"><h4><i data-lucide="users"></i> Tez İzleme Komitesi (TİK)</h4><p>Yeterlik sonrası 1 ay içinde, danışman dahil 3 öğretim üyesinden kurulur; yılda 2 kez toplanır; en az <strong>3 başarılı</strong> rapor gerekir.</p><span class="madde-ref">Madde 44-45</span></div>
+          <div class="rule-box accent-rule"><h4><i data-lucide="clipboard-check"></i> Tez Önerisi Savunması</h4><p>Yeterlik sonrası en geç <strong>6 ay içinde</strong> TİK önünde sözlü savunma yapılır. Reddedilirse yeni danışman/konu ile 3 veya 6 ay içinde yeniden savunma yapılır.</p><span class="madde-ref">Madde 45</span></div>
+          <div class="rule-box"><h4><i data-lucide="newspaper"></i> Yayın Şartı</h4><p>Savunmadan önce, alanla ilgili <strong>SSCI, ESCI, SCI/SCI-Expanded veya TR Dizin</strong> listesindeki bir dergide kabul almış/yayımlanmış en az bir makale ya da bir kitap yazarlığı gerekir. Sanat anabilim dallarında en az bir karma sanatsal etkinliğe katılım yeterlidir.</p><span class="madde-ref">Doktora Form 6A</span></div>
+          <div class="rule-box"><h4><i data-lucide="gavel"></i> Tez Savunma Jürisi</h4><p>Jüri, TİK üyelerinden 3 kişi ve kurum dışından 2 kişi olmak üzere <strong>5 asıl + 2 yedek</strong> üyeden oluşur. Savunma süresi en fazla <strong>120 dakikadır</strong>.</p><span class="madde-ref">Madde 46/ç-d</span></div>
+          <div class="rule-box danger-rule"><h4><i data-lucide="shield-alert"></i> İntihal Kontrolü</h4><p>Danışman, savunulabilir bulduğu tezi intihal yazılım raporuyla birlikte enstitüye teslim eder; rapor jüri üyelerine gönderilir.</p><span class="madde-ref">Madde 46/c</span></div>
+        </div>
+      </section>
+
+      <section class="block" id="yazim-doktora">
+        <div class="section-title"><span class="section-badge">Biçim ve içerik</span><h3>Tez Hazırlama ve Yazma Kılavuzu</h3></div>
+        <p class="section-intro">Enstitünün "Tez Hazırlama ve Yazma Kılavuzu"na dayanır; yüksek lisans, ikinci öğretim tezli yüksek lisans ve doktora tezleri için geçerlidir.</p>
+        <div class="rule-grid">
+          <div class="rule-box"><h4><i data-lucide="file-stack"></i> Kağıt ve Biçim</h4><p>A4, 1. hamur beyaz kağıt; dış kapak beyaz Amerikan Bristol karton (240 gr/m²). Kenar boşlukları: üst/alt 3 cm, sol 4 cm, sağ 2,5 cm. Yazı tipi <strong>Times New Roman, 12 punto</strong>, satır aralığı <strong>1,5</strong>, paragraf iki yana yaslı, girinti 1,25 cm.</p><span class="madde-ref">Bölüm 2.1-2.2</span></div>
+          <div class="rule-box"><h4><i data-lucide="heading-1"></i> Başlıklandırma</h4><p>Ondalık sistem (1.1, 1.1.1…) kullanılır; Giriş, Sonuç ve Kaynakça numaralandırılmaz. Bölüm başlıkları BÜYÜK HARF, koyu, ortalı ve yeni sayfadan başlar; alt başlıklar sola yaslıdır.</p><span class="madde-ref">Bölüm 2.3</span></div>
+          <div class="rule-box accent-rule"><h4><i data-lucide="quote"></i> Atıf ve Kaynakça</h4><p><strong>APA 7</strong> esas alınır; atıflar dipnot yerine metin içinde parantezle yapılır. 40 kelimeyi aşan alıntılar blok alıntı olarak ayrı paragrafta verilir. Kaynakça alfabetik sıralanır ve MS Word referans yönetim aracıyla oluşturulmalıdır.</p><span class="madde-ref">Bölüm 2.5</span></div>
+          <div class="rule-box"><h4><i data-lucide="table"></i> Tablo ve Şekiller</h4><p>Tablo/Şekil numarası ve başlığı üstte, ortalı; kelime ve numara koyu, başlık normal yazılır. Kaynak, sol alt köşede "Kaynak:" ifadesiyle 10 punto belirtilir. İki sayfadan uzun olanlar Ekler'e alınır.</p><span class="madde-ref">Bölüm 2.7</span></div>
+          <div class="rule-box"><h4><i data-lucide="save"></i> Teslim Formatı</h4><p>Tez, hem PDF hem Word formatında <strong>2 adet CD/DVD/USB</strong> olarak teslim edilir. Dosyalar "referansno_tez", "referansno_özet_tr", "referansno_özet_en" şeklinde adlandırılır.</p><span class="madde-ref">Bölüm 2.8</span></div>
+          <div class="rule-box danger-rule"><h4><i data-lucide="shield-alert"></i> İntihal ve Yapay Zekâ</h4><p>İntihal kesinlikle yasaktır; 4 satırı aşan alıntılar ayrı paragrafta, girintili ve italik yazılır. Yapay zekâ kullanımı fikir edinme ve literatür taraması ile sınırlıdır; doğrudan aktarım yapılamaz.</p><span class="madde-ref">Bölüm 3.4-3.5</span></div>
+        </div>
+
+        <div class="table-container" style="margin-top: 1.25rem;">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Ön Sayfa</th><th>Sayfa Numarası</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Dış Kapak</td><td>Numara yazılmaz</td></tr>
+                <tr><td>2</td><td>İç Kapak</td><td>(i) — verilir ama yazılmaz</td></tr>
+                <tr><td>3</td><td>YÖK Tarafından İstenen Sayfa</td><td>(ii) — verilir ama yazılmaz</td></tr>
+                <tr><td>4</td><td>Önsöz</td><td>iii</td></tr>
+                <tr><td>5</td><td>Türkçe Özet (en fazla 300 kelime)</td><td>iv</td></tr>
+                <tr><td>6</td><td>İngilizce Özet</td><td>v</td></tr>
+                <tr><td>7</td><td>İçindekiler</td><td>vi</td></tr>
+                <tr><td>8</td><td>Kısaltmalar ve Simgeler</td><td>vii</td></tr>
+                <tr><td>9</td><td>Tablolar Listesi</td><td>viii</td></tr>
+                <tr><td>10</td><td>Şekiller Listesi</td><td>ix</td></tr>
+                <tr><td>11</td><td>Ekler Listesi</td><td>x</td></tr>
+                <tr><td>12</td><td>Giriş (metin başlar)</td><td>1'den itibaren</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h4 style="font-family:'Source Serif 4', serif; font-size:0.98rem; font-weight:700; color:var(--slate-900); margin:1.75rem 0 0.75rem;">APA 7 Hızlı Referans</h4>
+        <div class="table-container">
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr><th>Tür</th><th>Kaynakça Formatı</th><th>Metin İçi Örnek</th></tr></thead>
+              <tbody>
+                <tr><td>Kitap (tek yazar)</td><td>Yazar, A. (Yıl). <em>Kitap Adı</em> (Baskı). Yayınevi.</td><td>(Soyadı, Yıl)</td></tr>
+                <tr><td>Kitap (2+ yazar)</td><td>Yazar, A., Yazar, B. ve Yazar, C. (Yıl). <em>Kitap Adı</em> (Baskı). Yayınevi.</td><td>(Soyadı & Soyadı, Yıl) · 3+ yazar: (Soyadı vd., Yıl)</td></tr>
+                <tr><td>Makale</td><td>Yazar, A. (Yıl). Makale adı. <em>Dergi Adı</em>, Cilt(Sayı), sayfa-aralığı.</td><td>(Soyadı, Yıl)</td></tr>
+                <tr><td>Tez</td><td>Yazar, A. (Yıl). <em>Tezin Adı</em>. Yayınlanmamış Yüksek Lisans/Doktora Tezi, Üniversite Adı Sosyal Bilimler Enstitüsü, Yer.</td><td>(Soyadı, Yıl)</td></tr>
+                <tr><td>Elektronik Kaynak</td><td>Yazar, A. (Yıl). Yayın Adı. Elektronik adres, Erişim Tarihi.</td><td>(Soyadı, Yıl)</td></tr>
+                <tr><td>Dolaylı (İkincil) Atıf</td><td>Yalnızca doğrudan okunan (ikincil) kaynak kaynakçaya girer, aslı girmez.</td><td>(Aktaran: Soyadı, Yıl)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h4 style="font-family:'Source Serif 4', serif; font-size:0.98rem; font-weight:700; color:var(--slate-900); margin:1.75rem 0 0.75rem;">Tez Teslimi Öncesi Kontrol Listesi</h4>
+        <div class="progress-tracker-card doktora-progress" style="margin-bottom: 0;">
+          <div class="progress-bar-track"><div class="progress-bar-fill" id="checklistFill-doktora"></div></div>
+          <div class="progress-bar-label" id="checklistLabel-doktora">0 / 11 madde tamamlandı</div>
+          <div class="milestone-list" id="checklistList-doktora"></div>
+        </div>
+      </section>
+
+      <section class="block" id="kurallar-doktora">
+        <div class="section-title"><span class="section-badge">Yönetmelik özeti</span><h3>Diğer Önemli Kurallar</h3></div>
+        <div class="rule-grid">
+          <div class="rule-box"><h4><i data-lucide="refresh-cw"></i> Kayıt Yenileme</h4><p>Öğrenciler her dönem katkı payını ödeyerek kayıtlarını yenilemek zorundadır. Yenilemeyenler o yarıyıl ders alamaz, yeterlik ve tez çalışması yapamaz.</p><span class="madde-ref">Madde 15</span></div>
+          <div class="rule-box"><h4><i data-lucide="pause-circle"></i> Kayıt Dondurma</h4><p>Hastalık, doğum, doğal afet, askerlik veya yurt dışı resmî görevlendirme nedeniyle, belgeyle başvuran öğrencinin kaydı dondurulabilir.</p><span class="madde-ref">Madde 16</span></div>
+          <div class="rule-box"><h4><i data-lucide="edit-3"></i> Ders Ekleme / Bırakma</h4><p>Danışmanın uygun görüşüyle, akademik takvimde belirtilen süreler içinde ders eklenebilir veya çıkarılabilir.</p><span class="madde-ref">Madde 17/6</span></div>
+          <div class="rule-box accent-rule"><h4><i data-lucide="scale"></i> Sınav Sonucuna İtiraz</h4><p>Notun otomasyona giriş tarihinden itibaren en geç <strong>üç iş günü</strong> içinde enstitü müdürlüğüne dilekçeyle itiraz edilebilir.</p><span class="madde-ref">Madde 22</span></div>
+          <div class="rule-box"><h4><i data-lucide="arrow-left-right"></i> Yatay Geçiş</h4><p>En az bir yarıyıl ders almış ve başarılı olmuş öğrenci, derslerin başlangıcından en az 15 iş günü önce başvurabilir. Tez teslimine 4 yarıyıldan az kalanlar başvuramaz.</p><span class="madde-ref">Madde 12</span></div>
+          <div class="rule-box danger-rule"><h4><i data-lucide="banknote"></i> Ücretli Döneme Geçiş</h4><p>Programı 8 yarıyılda bitiremeyenler, 9. yarıyıldan itibaren katkı payı ödemekle yükümlüdür.</p><span class="madde-ref">Madde 42/4</span></div>
+        </div>
+      </section>
+
+      <section class="block" id="formlar-doktora">
+        <div class="section-title"><span class="section-badge">Enstitü belgeleri</span><h3>Doktora Formları</h3></div>
+        <div class="doc-form-note"><strong>Not:</strong> Formlar bilgisayar ortamında doldurulmalıdır. "Word" bağlantısı boş formu, "Örnek PDF" bağlantısı doldurulmuş örneğini açar.</div>
+        <div class="doc-form-note" style="background: var(--primary-light); border-color: rgba(21,71,52,0.25);">
+          <strong>İmza/Paraf hakkında:</strong> Çoğu formda danışman ve ilgili jüri/kurul üyelerinin imzası zorunludur; bazı formlarda (ör. tez önerisi eki) öğrencinin kapak dahil <strong>her sayfayı imzalaması</strong> istenir. Bu, formdan forma değişebildiği için kesin kural olarak sunmuyoruz — her formun kendi imza/paraf alanlarını (genelde son sayfada bir tablo halinde) mutlaka kontrol edin.
+        </div>
+        <div class="doc-form-row" style="border-color: var(--primary); background: var(--primary-light); margin-bottom: 1rem;">
+          <div class="doc-form-row-title"><span class="doc-num" style="background: var(--primary); color: #fff;">★</span> Doktora Tez Hazırlama Şablonu — Kapak, Ön Sayfalar, Başlık Stilleri, Kaynakça Biçimi</div>
+          <div class="doc-form-actions">
+            <a class="doc-form-btn pdf" href="assets/tez_sablonu_doktora.pdf" target="_blank" rel="noopener"><i data-lucide="eye" style="width:14px;height:14px;"></i> Önizleme (PDF)</a>
+            <a class="doc-form-btn word" href="assets/tez_sablonu_doktora.docx" target="_blank" rel="noopener"><i data-lucide="file-text" style="width:14px;height:14px;"></i> İndir (Word)</a>
+          </div>
+        </div>
+        <div class="faq-search-wrap">
+          <i data-lucide="search" style="width:16px;height:16px;"></i>
+          <input type="text" id="formSearchInput-doktora" placeholder='Form ara (ör. "yeterlik", "TİK", "savunma")' oninput="filterForms('doktora')" />
+        </div>
+        <div class="doc-form-list" id="doktoraFormsList"></div>
+        <p id="formEmptyState-doktora" class="faq-empty-state" style="display:none;">Aramanızla eşleşen bir form bulunamadı.</p>
+      </section>
+
+      <section class="block" id="sss-doktora">
+        <div class="section-title"><span class="section-badge">Sık sorulan sorular</span><h3>Sık Sorulan Sorular</h3></div>
+        <div class="faq-search-wrap"><i data-lucide="search" style="width:16px;height:16px;"></i><input type="text" id="faqSearchInput-doktora" placeholder='Soru veya kelime ara (ör. "yeterlik", "TİK")' oninput="filterFaq('doktora')" /></div>
+        <div id="faqList-doktora" class="faq-list"></div>
+        <p id="faqEmptyState-doktora" class="faq-empty-state" style="display:none;">Aramanızla eşleşen bir soru bulunamadı.</p>
+      </section>
+
+    </div>
+
+    <!-- ================= GENEL FORMLAR (paylaşılan, her iki sekmeden erişilir) ================= -->
+    <section class="block" id="genel-formlar">
+      <div class="section-title"><span class="section-badge">Her iki program için ortak</span><h3>Genel Formlar</h3></div>
+      <p class="section-intro">Kayıt dondurma, yatay geçiş, dilekçe, askerlik tehiri gibi yüksek lisans ve doktora öğrencilerinin ortak kullandığı belgeler.</p>
+      <div class="doc-form-note"><strong>Not:</strong> Formlar bilgisayar ortamında doldurulmalıdır. "Word" bağlantısı boş formu, "Örnek PDF" bağlantısı doldurulmuş örneğini açar.</div>
+      <div class="doc-form-note" style="background: var(--primary-light); border-color: rgba(21,71,52,0.25);">
+        <strong>Danışmanınızın doldurması gereken formlar</strong> (İkinci Danışmanlık Atama, Anabilim Dalı Tez Kontrolü Beyanı, AKTS Ders Kayıt Formu vb.) bu sayfada değil, enstitünün <a href="https://www.selcuk.edu.tr/birim/sayfa/5327/ogretim-uyesi-formlari-3548" target="_blank" rel="noopener" style="color: var(--primary); font-weight:700;">Öğretim Üyesi Formları</a> sayfasındadır; gerektiğinde bağlantıyı danışmanınızla paylaşabilirsiniz.
+      </div>
+      <div class="faq-search-wrap">
+        <i data-lucide="search" style="width:16px;height:16px;"></i>
+        <input type="text" id="formSearchInput-genel" placeholder='Form ara (ör. "kayıt dondurma", "yatay geçiş", "askerlik")' oninput="filterForms('genel')" />
+      </div>
+      <div class="doc-form-list" id="genelFormsList"></div>
+      <p id="formEmptyState-genel" class="faq-empty-state" style="display:none;">Aramanızla eşleşen bir form bulunamadı.</p>
+    </section>
+
+    <!-- ================= FAYDALI BAĞLANTILAR (paylaşılan, her iki sekmeden erişilir) ================= -->
+    <section class="block" id="faydali-baglantilar">
+      <div class="section-title"><span class="section-badge">Dış bağlantılar</span><h3>Faydalı Bağlantılar</h3></div>
+      <p class="section-intro">Enstitünün ve üniversitenin sık kullanılan sayfaları.</p>
+      <div class="useful-link-grid">
+        <a class="useful-link-card" href="https://enstitu.selcuk.edu.tr/ensdersler" target="_blank" rel="noopener">
+          <div class="useful-link-icon"><i data-lucide="book-open"></i></div>
+          <div><h4>Enstitü Dersleri <i data-lucide="external-link"></i></h4><p>Anabilim dallarına göre açılan lisansüstü derslerin listesi.</p></div>
+        </a>
+        <a class="useful-link-card" href="https://bologna.selcuk.edu.tr/tr/Birimler" target="_blank" rel="noopener">
+          <div class="useful-link-icon"><i data-lucide="layers"></i></div>
+          <div><h4>Bologna Sistemi <i data-lucide="external-link"></i></h4><p>Program ve ders bilgi paketleri, öğrenme çıktıları.</p></div>
+        </a>
+        <a class="useful-link-card" href="https://enstitu.selcuk.edu.tr/" target="_blank" rel="noopener">
+          <div class="useful-link-icon"><i data-lucide="monitor"></i></div>
+          <div><h4>Enstitü Otomasyonu <i data-lucide="external-link"></i></h4><p>Kayıt yenileme, ders seçimi ve öğrenci işlemleri sistemi.</p></div>
+        </a>
+        <a class="useful-link-card" href="https://tez.yok.gov.tr/UlusalTezMerkezi/tarama.jsp" target="_blank" rel="noopener">
+          <div class="useful-link-icon"><i data-lucide="search"></i></div>
+          <div><h4>YÖK Ulusal Tez Merkezi <i data-lucide="external-link"></i></h4><p>Tez konusu taraması ve tamamlanmış tezlere erişim.</p></div>
+        </a>
+        <a class="useful-link-card" href="https://dergipark.org.tr/tr/pub/susbed" target="_blank" rel="noopener">
+          <div class="useful-link-icon"><i data-lucide="newspaper"></i></div>
+          <div><h4>SUSBED Dergisi <i data-lucide="external-link"></i></h4><p>Selçuk Üniversitesi Sosyal Bilimler Enstitüsü Dergisi.</p></div>
+        </a>
+        <a class="useful-link-card" href="http://mezun.selcuk.edu.tr/" target="_blank" rel="noopener">
+          <div class="useful-link-icon"><i data-lucide="graduation-cap"></i></div>
+          <div><h4>Mezun Portalı <i data-lucide="external-link"></i></h4><p>Mezuniyet sonrası iletişim ve mezun bilgi sistemi.</p></div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <div id="surecimPrintReport" class="print-only"></div>
+
+  <footer>
+    <p>© Selçuk Üniversitesi Sosyal Bilimler Enstitüsü · Felsefe Anabilim Dalı Lisansüstü Portalı</p>
+  </footer>
+
+  <script>
+    function safeCreateIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
+    }
+
+    let currentView = 'yl';
+    let scrollObserver = null;
+
+    const subnavItems = {
+      yl: [
+        { label: "Akademik Takvim", icon: "calendar-days", targetId: "akademik-takvim" },
+        { label: "Program Bilgisi", icon: "layers", targetId: "program-bilgisi-yl" },
+        { label: "Süreç Diyagramı", icon: "calendar-clock", targetId: "surec-yl" },
+        { label: "Tez Sürecim", icon: "list-checks", targetId: "surecim-yl" },
+        { label: "Not Sistemi", icon: "percent", targetId: "not-sistemi-yl" },
+        { label: "Danışman & Tez", icon: "users", targetId: "danisman-yl" },
+        { label: "Yazım Kılavuzu", icon: "file-stack", targetId: "yazim-yl" },
+        { label: "Diğer Kurallar", icon: "scroll-text", targetId: "kurallar-yl" },
+        { label: "Formlar", icon: "file-text", targetId: "formlar-yl" },
+        { label: "SSS", icon: "help-circle", targetId: "sss-yl" },
+        { label: "Genel Formlar", icon: "folder-open", targetId: "genel-formlar" },
+        { label: "Faydalı Bağlantılar", icon: "external-link", targetId: "faydali-baglantilar" }
+      ],
+      doktora: [
+        { label: "Akademik Takvim", icon: "calendar-days", targetId: "akademik-takvim" },
+        { label: "Program Bilgisi", icon: "layers", targetId: "program-bilgisi-doktora" },
+        { label: "Süreç Diyagramı", icon: "calendar-clock", targetId: "surec-doktora" },
+        { label: "Tez Sürecim", icon: "list-checks", targetId: "surecim-doktora" },
+        { label: "Not Sistemi", icon: "percent", targetId: "not-sistemi-doktora" },
+        { label: "Danışman & Tez", icon: "users", targetId: "danisman-doktora" },
+        { label: "Yazım Kılavuzu", icon: "file-stack", targetId: "yazim-doktora" },
+        { label: "Diğer Kurallar", icon: "scroll-text", targetId: "kurallar-doktora" },
+        { label: "Formlar", icon: "file-text", targetId: "formlar-doktora" },
+        { label: "SSS", icon: "help-circle", targetId: "sss-doktora" },
+        { label: "Genel Formlar", icon: "folder-open", targetId: "genel-formlar" },
+        { label: "Faydalı Bağlantılar", icon: "external-link", targetId: "faydali-baglantilar" }
+      ]
+    };
+
+    function renderSubnav() {
+      const container = document.getElementById("subnavContainer");
+      if (!container) return;
+      container.innerHTML = subnavItems[currentView].map(item => `
+        <button class="subnav-btn" data-target="${item.targetId}" onclick="scrollToSection('${item.targetId}')">
+          <i data-lucide="${item.icon}" style="width:14px;height:14px;"></i> ${item.label}
+        </button>`).join("");
+      safeCreateIcons();
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      try { history.replaceState(null, "", "#" + currentView + "/" + id); } catch (e) { /* yoksay */ }
+    }
+
+    function setupScrollSpy() {
+      if (scrollObserver) scrollObserver.disconnect();
+      const sections = subnavItems[currentView].map(i => document.getElementById(i.targetId)).filter(Boolean);
+      if (!("IntersectionObserver" in window) || !sections.length) return;
+      scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          document.querySelectorAll(".subnav-btn").forEach(btn => btn.classList.remove("active"));
+          const btn = document.querySelector(`.subnav-btn[data-target="${entry.target.id}"]`);
+          if (btn) btn.classList.add("active");
+        });
+      }, { rootMargin: "-140px 0px -60% 0px", threshold: 0 });
+      sections.forEach(s => scrollObserver.observe(s));
+    }
+
+    // Sekme durumunu (ve isteğe bağlı bölümü) değiştirir, kaydırmayan sürüm — hash'ten ilk yükleme için.
+    function setActiveView(view) {
+      currentView = view;
+      document.getElementById("btnViewYL").classList.toggle("active", view === "yl");
+      document.getElementById("btnViewDoktora").classList.toggle("active", view === "doktora");
+      document.getElementById("viewYL").classList.toggle("active", view === "yl");
+      document.getElementById("viewDoktora").classList.toggle("active", view === "doktora");
+      document.getElementById("heroTitle").textContent = view === "yl" ? "Yüksek Lisans Akademik Kılavuzu" : "Doktora Akademik Kılavuzu";
+      document.getElementById("heroSub").textContent = view === "yl"
+        ? "Süreler, ders yükü, not sistemi, tez süreci ve formlar tek sayfada"
+        : "Süreler, ders yükü, yeterlik/TİK süreci, tez savunması ve sık sorulan sorular tek sayfada";
+      renderSubnav();
+      setupScrollSpy();
+      updateHeroDeadlineBadge();
+    }
+
+    function switchMainView(view) {
+      setActiveView(view);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      try { history.replaceState(null, "", "#" + view); } catch (e) { /* yoksay */ }
+    }
+
+    function initFromHash() {
+      const hash = (window.location.hash || "").replace("#", "");
+      if (!hash) return;
+      const [view, section] = hash.split("/");
+      if (view !== "yl" && view !== "doktora") return;
+      setActiveView(view);
+      if (section) {
+        setTimeout(() => {
+          const el = document.getElementById(section);
+          if (el) el.scrollIntoView({ block: "start" });
+        }, 60);
+      }
+    }
+
+    /* ============ AKADEMİK TAKVİM (Enstitü'nün resmî 2026-2027 takvimi — Tezli YL / II. Öğretim Tezli YL / Doktora) ============ */
+    const officialCalendarEvents = {
+      guz: [
+        { id: "guz-1", title: "Öğretim Üyesi Ders Açma/Kapatma", dateStr: "31 Ağustos - 4 Eylül 2026", startDate: "2026-08-31T00:00:00", endDate: "2026-09-04T23:59:59", category: "ders", catLabel: "Ders Açma" },
+        { id: "guz-2", title: "Kayıt Yenileme ve Ders Seçimi", dateStr: "7 - 14 Eylül 2026", startDate: "2026-09-07T00:00:00", endDate: "2026-09-14T23:59:59", category: "kayit", catLabel: "Ders Kaydı" },
+        { id: "guz-3", title: "Danışman Onayları", dateStr: "7 - 16 Eylül 2026", startDate: "2026-09-07T00:00:00", endDate: "2026-09-16T23:59:59", category: "onay", catLabel: "Danışman Onayı" },
+        { id: "guz-4", title: "Mazeretli Geç Kayıtlar", dateStr: "21 - 25 Eylül 2026", startDate: "2026-09-21T00:00:00", endDate: "2026-09-25T17:00:00", category: "kayit", catLabel: "Mazeret" },
+        { id: "guz-5", title: "Güz Derslerinin Başlangıcı", dateStr: "14 Eylül 2026", startDate: "2026-09-14T08:00:00", endDate: "2026-09-14T23:59:59", category: "ders", catLabel: "Ders Başı" },
+        { id: "guz-6", title: "Ara Tatil", dateStr: "31 Ekim – 6 Kasım 2026", startDate: "2026-10-31T00:00:00", endDate: "2026-11-06T23:59:59", category: "ders", catLabel: "Ara Tatil" },
+        { id: "guz-7", title: "Güz Derslerinin Bitişi", dateStr: "25 Aralık 2026", startDate: "2026-12-25T17:00:00", endDate: "2026-12-25T23:59:59", category: "ders", catLabel: "Dönem Sonu" },
+        { id: "guz-8", title: "Güz Final Sınavı", dateStr: "28 - 31 Aralık 2026", startDate: "2026-12-28T08:00:00", endDate: "2026-12-31T23:59:59", category: "sinav", catLabel: "Final Sınavı" },
+        { id: "guz-9", title: "Güz Bütünleme Sınavı", dateStr: "11 - 15 Ocak 2027", startDate: "2027-01-11T08:00:00", endDate: "2027-01-15T23:59:59", category: "sinav", catLabel: "Bütünleme" },
+        { id: "guz-10", title: "Güz Dönemi Bitiş Tarihi", dateStr: "15 Ocak 2027", startDate: "2027-01-15T00:00:00", endDate: "2027-01-15T23:59:59", category: "ders", catLabel: "Dönem Sonu" }
+      ],
+      bahar: [
+        { id: "bah-1", title: "Kayıt Yenileme ve Ders Seçimi", dateStr: "8 - 15 Şubat 2027", startDate: "2027-02-08T00:00:00", endDate: "2027-02-15T23:59:59", category: "kayit", catLabel: "Ders Kaydı" },
+        { id: "bah-2", title: "Danışman Onayları", dateStr: "8 - 17 Şubat 2027", startDate: "2027-02-08T00:00:00", endDate: "2027-02-17T23:59:59", category: "onay", catLabel: "Danışman Onayı" },
+        { id: "bah-3", title: "Mazeretli Geç Kayıtlar", dateStr: "22 - 26 Şubat 2027", startDate: "2027-02-22T00:00:00", endDate: "2027-02-26T17:00:00", category: "kayit", catLabel: "Mazeret" },
+        { id: "bah-4", title: "Bahar Derslerinin Başlangıcı", dateStr: "15 Şubat 2027", startDate: "2027-02-15T08:00:00", endDate: "2027-02-15T23:59:59", category: "ders", catLabel: "Ders Başı" },
+        { id: "bah-5", title: "Ara Tatil", dateStr: "20 – 26 Mart 2027", startDate: "2027-03-20T00:00:00", endDate: "2027-03-26T23:59:59", category: "ders", catLabel: "Ara Tatil" },
+        { id: "bah-6", title: "Bahar Derslerinin Bitişi", dateStr: "11 Haziran 2027", startDate: "2027-06-11T17:00:00", endDate: "2027-06-11T23:59:59", category: "ders", catLabel: "Dönem Sonu" },
+        { id: "bah-7", title: "Bahar Final Sınavı", dateStr: "14 - 18 Haziran 2027", startDate: "2027-06-14T08:00:00", endDate: "2027-06-18T23:59:59", category: "sinav", catLabel: "Final Sınavı" },
+        { id: "bah-8", title: "Bahar Bütünleme Sınavı", dateStr: "21 - 25 Haziran 2027", startDate: "2027-06-21T08:00:00", endDate: "2027-06-25T23:59:59", category: "sinav", catLabel: "Bütünleme" },
+        { id: "bah-9", title: "Bahar Dönemi Bitiş Tarihi", dateStr: "30 Haziran 2027", startDate: "2027-06-30T00:00:00", endDate: "2027-06-30T23:59:59", category: "ders", catLabel: "Dönem Sonu" }
+      ]
+    };
+
+    let activeCalSem = "guz";
+    let activeCalFilter = "all";
+
+    function changeSemester(sem) {
+      activeCalSem = sem;
+      const btnGuz = document.getElementById("btnSemGuz");
+      const btnBahar = document.getElementById("btnSemBahar");
+      if (btnGuz && btnBahar) {
+        btnGuz.classList.toggle("active", sem === "guz");
+        btnBahar.classList.toggle("active", sem === "bahar");
+      }
+      renderTimelineCards();
+    }
+
+    function applyFilter(cat, btnElem) {
+      activeCalFilter = cat;
+      document.querySelectorAll(".f-pill").forEach(p => p.classList.remove("active"));
+      if (btnElem) btnElem.classList.add("active");
+      renderTimelineCards();
+    }
+
+    function renderTimelineCards() {
+      const grid = document.getElementById("timelineGrid");
+      if (!grid) return;
+      grid.innerHTML = "";
+      const now = new Date();
+      const events = officialCalendarEvents[activeCalSem] || [];
+      const filtered = events.filter(ev => {
+        if (activeCalFilter === "all") return true;
+        if (activeCalFilter === "kayit") return ev.category === "kayit" || ev.category === "onay";
+        return ev.category === activeCalFilter;
+      });
+      if (!filtered.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem; color:var(--slate-500);">Etkinlik bulunamadı.</div>`;
+        return;
+      }
+      filtered.forEach(ev => {
+        const sDate = new Date(ev.startDate);
+        const eDate = new Date(ev.endDate);
+        let cardClass = (now >= sDate && now <= eDate) ? "state-ongoing" : (now < sDate ? "state-next" : "state-past");
+        let statusHtml = (now >= sDate && now <= eDate)
+          ? `<span class="status-dot dot-green"></span> <span style="color:var(--status-success);">Devam Ediyor</span>`
+          : (now < sDate
+            ? `<span class="status-dot dot-amber"></span> <span style="color:var(--status-warning);">${Math.ceil((sDate - now) / (1000 * 60 * 60 * 24))} gün kaldı</span>`
+            : `<span class="status-dot dot-gray"></span> <span style="color:var(--slate-500);">Tamamlandı</span>`);
+        let catBadgeClass = "cat-kayit";
+        if (ev.category === "sinav") catBadgeClass = "cat-sinav";
+        else if (ev.category === "ders") catBadgeClass = "cat-ders";
+        else if (ev.category === "onay") catBadgeClass = "cat-onay";
+        const card = document.createElement("div");
+        card.className = `t-card ${cardClass}`;
+        card.dataset.eventId = ev.id;
+        card.innerHTML = `
+          <div>
+            <div class="t-card-top">
+              <span class="t-card-cat ${catBadgeClass}">${ev.catLabel}</span>
+              <div style="font-size:0.75rem; font-weight:700;">${statusHtml}</div>
+            </div>
+            <div class="t-card-title">${ev.title}</div>
+            <div class="t-card-date"><i data-lucide="clock" style="width:14px;height:14px;"></i> ${ev.dateStr}</div>
+          </div>`;
+        grid.appendChild(card);
+      });
+      safeCreateIcons();
+    }
+
+    function updateCalSpotlight() {
+      const now = new Date();
+      const allEvents = [...(officialCalendarEvents.guz || []), ...(officialCalendarEvents.bahar || [])];
+      if (!allEvents.length) return;
+      let target = allEvents.find(ev => now >= new Date(ev.startDate) && now <= new Date(ev.endDate));
+      let isOngoing = true;
+      if (!target) {
+        isOngoing = false;
+        target = allEvents.find(ev => new Date(ev.startDate) > now);
+      }
+      if (!target) target = allEvents[0];
+      const sName = document.getElementById("spotlightName");
+      const sDate = document.getElementById("spotlightDate");
+      const sTag = document.getElementById("spotlightTagText");
+      if (!sName || !sDate || !sTag) return;
+      sName.textContent = target.title;
+      sDate.innerHTML = `<i data-lucide="calendar" style="width:16px;height:16px;"></i> <span>${target.dateStr}</span>`;
+      sTag.textContent = isOngoing ? "Şu An Devam Ediyor / Kritik" : "Sıradaki Akademik Süreç";
+      const countTarget = isOngoing ? new Date(target.endDate) : new Date(target.startDate);
+      clearInterval(window.calCountdownTimer);
+      window.calCountdownTimer = setInterval(() => {
+        const diff = countTarget - new Date();
+        const cdD = document.getElementById("cdDays");
+        const cdH = document.getElementById("cdHours");
+        const cdM = document.getElementById("cdMinutes");
+        if (!cdD || !cdH || !cdM) return;
+        if (diff <= 0) { cdD.textContent = "00"; cdH.textContent = "00"; cdM.textContent = "00"; return; }
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / 1000 / 60) % 60);
+        cdD.textContent = d < 10 ? '0' + d : d;
+        cdH.textContent = h < 10 ? '0' + h : h;
+        cdM.textContent = m < 10 ? '0' + m : m;
+      }, 1000);
+      safeCreateIcons();
+    }
+
+    /* ============ TEZ SÜRECİM: İLERLEME TAKİBİ + ZAMAN ÇİZELGESİ ============ */
+    const MILESTONES = {
+      yl: [
+        { id: "ders", label: "Ders Dönemi ve Seminer Tamamlandı" },
+        { id: "oneri", label: "Tez Önerisi Kabul Edildi" },
+        { id: "yazim", label: "Tez Yazımı Tamamlandı (Danışman Onayı)" },
+        { id: "savunma", label: "Tez Savunması Yapıldı" },
+        { id: "diploma", label: "Diploma Süreci Tamamlandı" }
+      ],
+      doktora: [
+        { id: "ders", label: "Ders Dönemi ve Seminer Tamamlandı" },
+        { id: "yeterlik", label: "Yeterlik Sınavı Geçildi" },
+        { id: "tik_kurulum", label: "Tez İzleme Komitesi (TİK) Kuruldu" },
+        { id: "oneri", label: "Tez Önerisi Kabul Edildi" },
+        { id: "tik_raporlari", label: "Başarılı TİK Raporu Sayısı", counter: true, target: 3 },
+        { id: "yayin", label: "Yayın Şartı Sağlandı (Makale/Kitap)", hasNote: true, notePlaceholder: "Dergi/kitap adı, yıl (isteğe bağlı not)" },
+        { id: "yazim", label: "Tez Yazımı Tamamlandı (Danışman Onayı)" },
+        { id: "savunma", label: "Tez Savunması Yapıldı" },
+        { id: "diploma", label: "Diploma Süreci Tamamlandı" }
+      ]
+    };
+    const GRAD_PROGRESS_KEY = "sufl_gradSurecim_v1";
+    let gradProgressState = {
+      yl: { milestones: {}, notes: {}, enrollYear: "" },
+      doktora: { milestones: {}, notes: {}, enrollYear: "", yeterlikDate: "" }
+    };
+
+    function loadGradProgress() {
+      try {
+        const raw = window.localStorage.getItem(GRAD_PROGRESS_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object") {
+            gradProgressState.yl = Object.assign({ milestones: {}, notes: {}, enrollYear: "" }, parsed.yl);
+            gradProgressState.doktora = Object.assign({ milestones: {}, notes: {}, enrollYear: "", yeterlikDate: "" }, parsed.doktora);
+          }
+        }
+      } catch (e) { /* localStorage kullanılamıyor: varsayılan boş durumla devam edilir */ }
+    }
+    function saveGradProgress() {
+      try { window.localStorage.setItem(GRAD_PROGRESS_KEY, JSON.stringify(gradProgressState)); }
+      catch (e) { /* saklanamıyorsa sessizce geç */ }
+    }
+
+    function renderMilestones(tab) {
+      const container = document.getElementById("milestoneList-" + tab);
+      if (!container) return;
+      const list = MILESTONES[tab];
+      const state = gradProgressState[tab].milestones || {};
+      container.innerHTML = list.map(m => {
+        if (m.counter) {
+          const val = state[m.id] || 0;
+          return `
+            <div class="milestone-row">
+              <span class="milestone-label">${m.label}</span>
+              <div class="milestone-counter">
+                <button type="button" onclick="adjustCounter('${tab}','${m.id}',-1)">−</button>
+                <span>${val} / ${m.target}</span>
+                <button type="button" onclick="adjustCounter('${tab}','${m.id}',1)">+</button>
+              </div>
+            </div>`;
+        }
+        const checked = state[m.id] ? "checked" : "";
+        const noteVal = (gradProgressState[tab].notes || {})[m.id] || "";
+        const noteRow = m.hasNote ? `
+          <div class="milestone-note-row">
+            <input type="text" class="milestone-note-input" placeholder="${m.notePlaceholder || ""}" value="${noteVal.replace(/"/g, '&quot;')}" oninput="updateMilestoneNote('${tab}','${m.id}', this.value)" />
+          </div>` : "";
+        return `
+          <div>
+            <label class="milestone-row">
+              <span class="milestone-label">${m.label}</span>
+              <input type="checkbox" ${checked} onchange="toggleMilestone('${tab}','${m.id}', this.checked)" />
+            </label>
+            ${noteRow}
+          </div>`;
+      }).join("");
+      updateProgressBar(tab);
+    }
+
+    function toggleMilestone(tab, id, val) {
+      gradProgressState[tab].milestones[id] = val;
+      saveGradProgress();
+      updateProgressBar(tab);
+    }
+    function updateMilestoneNote(tab, id, val) {
+      if (!gradProgressState[tab].notes) gradProgressState[tab].notes = {};
+      gradProgressState[tab].notes[id] = val;
+      saveGradProgress();
+    }
+    function adjustCounter(tab, id, delta) {
+      const cur = gradProgressState[tab].milestones[id] || 0;
+      gradProgressState[tab].milestones[id] = Math.max(0, cur + delta);
+      saveGradProgress();
+      renderMilestones(tab);
+    }
+    function updateProgressBar(tab) {
+      const list = MILESTONES[tab];
+      const state = gradProgressState[tab].milestones || {};
+      let done = 0;
+      list.forEach(m => {
+        if (m.counter) { if ((state[m.id] || 0) >= m.target) done++; }
+        else if (state[m.id]) done++;
+      });
+      const pct = list.length ? Math.round((done / list.length) * 100) : 0;
+      const fill = document.getElementById("progressFill-" + tab);
+      const label = document.getElementById("progressLabel-" + tab);
+      if (fill) fill.style.width = pct + "%";
+      if (label) label.textContent = `${done} / ${list.length} aşama tamamlandı`;
+      updateHeroDeadlineBadge();
+    }
+
+    function updateEnrollYear(tab, val) {
+      gradProgressState[tab].enrollYear = val;
+      saveGradProgress();
+      renderTimeline(tab);
+      updateHeroDeadlineBadge();
+    }
+    function updateYeterlikDate(val) {
+      gradProgressState.doktora.yeterlikDate = val;
+      saveGradProgress();
+      renderTimeline("doktora");
+      updateHeroDeadlineBadge();
+    }
+
+    function renderTimeline(tab) {
+      const body = document.getElementById("timelineBody-" + tab);
+      if (!body) return;
+      const year = parseInt(gradProgressState[tab].enrollYear);
+      if (!year || isNaN(year)) {
+        body.innerHTML = `<tr><td colspan="2" style="text-align:center; color:var(--slate-500);">İlk kayıt yılınızı girin</td></tr>`;
+        return;
+      }
+      let rows = [];
+      if (tab === "yl") {
+        rows = [
+          ["4. Yarıyıl Sonu (Tez Önerisi Zorunlu)", `${year + 2} yılı (yaklaşık)`],
+          ["Azami Süre (6. Yarıyıl Sonu / 3 Yıl)", `${year + 3} yılı (yaklaşık)`]
+        ];
+      } else {
+        rows = [
+          ["4. Yarıyıl Sonu (Ders/Seminer Tamamlama)", `${year + 2} yılı (yaklaşık)`],
+          ["Yeterlik Sınavı Penceresi (5.-6. Yarıyıl)", `${year + 2} - ${year + 3} arası (Nisan-Mayıs / Ekim-Kasım)`],
+          ["Azami Süre (12. Yarıyıl Sonu / 6 Yıl)", `${year + 6} yılı (yaklaşık)`]
+        ];
+        const yeterlikDateStr = gradProgressState.doktora.yeterlikDate;
+        if (yeterlikDateStr) {
+          const yd = new Date(yeterlikDateStr + "T00:00:00");
+          if (!isNaN(yd.getTime())) {
+            const tikDeadline = new Date(yd); tikDeadline.setMonth(tikDeadline.getMonth() + 1);
+            const oneriDeadline = new Date(yd); oneriDeadline.setMonth(oneriDeadline.getMonth() + 6);
+            rows.push(["TİK Kurulma Son Tarihi (Yeterlik + 1 ay)", tikDeadline.toLocaleDateString("tr-TR")]);
+            rows.push(["Tez Önerisi Son Tarihi (Yeterlik + 6 ay)", oneriDeadline.toLocaleDateString("tr-TR")]);
+          }
+        }
+      }
+      body.innerHTML = rows.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join("");
+    }
+
+    // Hero'daki "Sıradaki" rozeti: aktif sekme için en yakın yaklaşan tarihi hesaplar.
+    function computeUpcomingDeadlines(tab) {
+      const state = gradProgressState[tab];
+      if (!state) return [];
+      const year = parseInt(state.enrollYear);
+      const ms = state.milestones || {};
+      const deadlines = [];
+      if (year && !isNaN(year)) {
+        if (!ms.ders) deadlines.push({ label: "4. Yarıyıl Sonu (Ders/Seminer)", date: new Date(`${year + 2}-06-30`) });
+        if (tab === "yl") {
+          if (!ms.diploma) deadlines.push({ label: "Azami Süre", date: new Date(`${year + 3}-06-30`) });
+        } else {
+          if (!ms.yeterlik) deadlines.push({ label: "Yeterlik Penceresi Başlangıcı", date: new Date(`${year + 2}-04-01`) });
+          if (!ms.diploma) deadlines.push({ label: "Azami Süre", date: new Date(`${year + 6}-06-30`) });
+        }
+      }
+      if (tab === "doktora" && state.yeterlikDate) {
+        const yd = new Date(state.yeterlikDate + "T00:00:00");
+        if (!isNaN(yd.getTime())) {
+          if (!ms.tik_kurulum) { const d = new Date(yd); d.setMonth(d.getMonth() + 1); deadlines.push({ label: "TİK Kurulma Son Tarihi", date: d }); }
+          else if (!ms.oneri) { const d = new Date(yd); d.setMonth(d.getMonth() + 6); deadlines.push({ label: "Tez Önerisi Son Tarihi", date: d }); }
+        }
+      }
+      return deadlines.filter(d => !isNaN(d.date.getTime())).sort((a, b) => a.date - b.date);
+    }
+
+    function updateHeroDeadlineBadge() {
+      const badge = document.getElementById("heroDeadlineBadge");
+      if (!badge) return;
+      const deadlines = computeUpcomingDeadlines(currentView);
+      if (!deadlines.length) { badge.style.display = "none"; return; }
+      const next = deadlines[0];
+      badge.style.display = "inline-flex";
+      // İkonu yalnızca ilk seferde oluştur; sonraki güncellemelerde sadece metni değiştir
+      // (her onay kutusu tıklamasında tüm sayfayı yeniden tarayan lucide.createIcons() çağrısından kaçınmak için).
+      let textSpan = badge.querySelector(".hero-deadline-text");
+      if (!textSpan) {
+        badge.innerHTML = `<i data-lucide="alarm-clock" style="width:14px;height:14px;"></i><span class="hero-deadline-text"></span>`;
+        safeCreateIcons();
+        textSpan = badge.querySelector(".hero-deadline-text");
+      }
+      textSpan.textContent = ` Sıradaki: ${next.label} — ${next.date.toLocaleDateString("tr-TR", { month: "long", year: "numeric" })}`;
+    }
+
+    // Tez Sürecim raporu — yazdırma / PDF olarak kaydetme
+    function downloadSurecimReport(tab) {
+      const list = MILESTONES[tab];
+      const state = gradProgressState[tab].milestones || {};
+      const progRows = list.map(m => {
+        let status;
+        if (m.counter) { const v = state[m.id] || 0; status = `${v} / ${m.target}${v >= m.target ? " (Tamamlandı)" : ""}`; }
+        else status = state[m.id] ? "Tamamlandı" : "Bekliyor";
+        return `<tr><td>${m.label}</td><td>${status}</td></tr>`;
+      }).join("");
+      const timelineBody = document.getElementById("timelineBody-" + tab);
+      const timelineRows = timelineBody ? timelineBody.innerHTML : "";
+      const dateStr = new Date().toLocaleDateString("tr-TR");
+      const programLabel = tab === "yl" ? "Yüksek Lisans" : "Doktora";
+      const container = document.getElementById("surecimPrintReport");
+      if (!container) return;
+      container.innerHTML = `
+        <div>
+          <h2>Tez Süreci Raporu — ${programLabel}</h2>
+          <div class="pr-meta">Selçuk Üniversitesi Sosyal Bilimler Enstitüsü · Oluşturulma tarihi: ${dateStr}</div>
+          <h3>İlerleme Durumu</h3>
+          <table><thead><tr><th>Aşama</th><th>Durum</th></tr></thead><tbody>${progRows}</tbody></table>
+          <h3>Zaman Çizelgesi</h3>
+          <table><thead><tr><th>Aşama</th><th>Yaklaşık Tarih</th></tr></thead><tbody>${timelineRows}</tbody></table>
+          <p class="pr-note">Bu rapor girdiğiniz bilgilere dayanır; resmî bir belge değildir.</p>
+        </div>`;
+      window.print();
+    }
+
+    /* ============ TEZ TESLİMİ ÖNCESİ KONTROL LİSTESİ ============ */
+    const CHECKLIST_ITEMS = [
+      { id: "kagit", label: "A4, 1. hamur kağıt ve doğru kenar boşlukları kullanıldı" },
+      { id: "font", label: "Times New Roman, 12 punto, 1,5 satır aralığı uygulandı" },
+      { id: "paragraf", label: "Paragraflar iki yana yaslı, 1,25 cm girintili" },
+      { id: "basliklar", label: "Başlıklar ondalık sistemle ve doğru biçimde numaralandırıldı" },
+      { id: "kaynakca", label: "Atıflar ve kaynakça APA 7'ya uygun" },
+      { id: "tablosekil", label: "Tablo/şekil numaralandırma ve kaynak gösterimi tamam" },
+      { id: "sayfano", label: "Sayfa numaraları doğru sırada (roman → arap)" },
+      { id: "ozetler", label: "Türkçe ve İngilizce özet 300 kelimeyi geçmiyor" },
+      { id: "intihal", label: "İntihal (Turnitin) raporu alındı, danışman onayı var" },
+      { id: "formlar", label: "Gerekli formlar (mezuniyet, tez kabul, etik beyan vb.) dolduruldu" },
+      { id: "teslim", label: "Ciltlenmiş tez + CD/DVD/USB (PDF+Word) hazır" }
+    ];
+    const TESLIM_CHECKLIST_KEY = "sufl_teslimChecklist_v1";
+    let teslimChecklistState = { yl: {}, doktora: {} };
+
+    function loadTeslimChecklist() {
+      try {
+        const raw = window.localStorage.getItem(TESLIM_CHECKLIST_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object") {
+            teslimChecklistState.yl = Object.assign({}, parsed.yl);
+            teslimChecklistState.doktora = Object.assign({}, parsed.doktora);
+          }
+        }
+      } catch (e) { /* localStorage kullanılamıyor: varsayılan boş durumla devam edilir */ }
+    }
+    function saveTeslimChecklist() {
+      try { window.localStorage.setItem(TESLIM_CHECKLIST_KEY, JSON.stringify(teslimChecklistState)); }
+      catch (e) { /* saklanamıyorsa sessizce geç */ }
+    }
+
+    function renderChecklist(tab) {
+      const container = document.getElementById("checklistList-" + tab);
+      if (!container) return;
+      const state = teslimChecklistState[tab] || {};
+      container.innerHTML = CHECKLIST_ITEMS.map(item => `
+        <label class="milestone-row">
+          <span class="milestone-label">${item.label}</span>
+          <input type="checkbox" ${state[item.id] ? "checked" : ""} onchange="toggleChecklistItem('${tab}','${item.id}', this.checked)" />
+        </label>`).join("");
+      updateChecklistBar(tab);
+    }
+    function toggleChecklistItem(tab, id, val) {
+      if (!teslimChecklistState[tab]) teslimChecklistState[tab] = {};
+      teslimChecklistState[tab][id] = val;
+      saveTeslimChecklist();
+      updateChecklistBar(tab);
+    }
+    function updateChecklistBar(tab) {
+      const state = teslimChecklistState[tab] || {};
+      const done = CHECKLIST_ITEMS.filter(item => state[item.id]).length;
+      const pct = Math.round((done / CHECKLIST_ITEMS.length) * 100);
+      const fill = document.getElementById("checklistFill-" + tab);
+      const label = document.getElementById("checklistLabel-" + tab);
+      if (fill) fill.style.width = pct + "%";
+      if (label) label.textContent = `${done} / ${CHECKLIST_ITEMS.length} madde tamamlandı`;
+    }
+    function initTeslimChecklist() {
+      loadTeslimChecklist();
+      renderChecklist("yl");
+      renderChecklist("doktora");
+    }
+
+    function initGradSurecim() {
+      loadGradProgress();
+      renderMilestones("yl");
+      renderMilestones("doktora");
+      const ey1 = document.getElementById("enrollYear-yl");
+      if (ey1) ey1.value = gradProgressState.yl.enrollYear || "";
+      const ey2 = document.getElementById("enrollYear-doktora");
+      if (ey2) ey2.value = gradProgressState.doktora.enrollYear || "";
+      const yd = document.getElementById("yeterlikDate-doktora");
+      if (yd) yd.value = gradProgressState.doktora.yeterlikDate || "";
+      renderTimeline("yl");
+      renderTimeline("doktora");
+      updateHeroDeadlineBadge();
+    }
+
+
+    const notSistemiRows = [
+      ["88 – 100", "4.00", "AA", "Başarılı", "green"],
+      ["80 – 87", "3.50", "BA", "Başarılı", "green"],
+      ["73 – 79", "3.00", "BB", "Başarılı", "green"],
+      ["66 – 72", "2.50", "CB", "YL'de Başarılı · Doktorada Başarısız", "amber"],
+      ["60 – 65", "2.00", "CC", "Başarısız", "gray"],
+      ["55 – 59", "1.50", "DC", "Başarısız", "gray"],
+      ["50 – 54", "1.00", "DD", "Başarısız", "gray"],
+      ["0 – 49", "0.00", "FF", "Başarısız", "gray"],
+      ["0", "0.00", "F", "Devamsız", "gray"],
+      ["—", "—", "G", "Geçer (kredisiz ders / seminer / TİK)", "blue"],
+      ["—", "—", "K", "Kalır (kredisiz ders / seminer / TİK)", "gray"],
+      ["—", "—", "M", "Muaf", "blue"]
+    ];
+    function renderNotSistemi(bodyId) {
+      const body = document.getElementById(bodyId);
+      if (!body) return;
+      body.innerHTML = notSistemiRows.map(([range, point, letter, desc, tone]) => `
+        <tr><td>${range}</td><td>${point}</td><td><span class="tag-pill pill-${tone}">${letter}</span></td><td>${desc}</td></tr>`).join("");
+    }
+
+    /* ============ YÜKSEK LİSANS FORMLARI (gerçek bağlantılar) ============ */
+    const ylFormsData = [
+      { title: "Yüksek Lisans Tez Önerisi Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/1. Yüksek Lisans Tez Önerisi Formu_638784961573490418.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/1. (Örnek Doldurulmuş) Yüksek Lisans Tez Önerisi Formu_638762445258182618.pdf", docs: [
+        "Tez çalışma taslağı (ekte sunulan taslak metin)"
+      ], docsNote: "Danışman onayından sonra öğrenci ve danışman imzasıyla anabilim dalı başkanlığına, oradan enstitüye iletilir; ORCID numarası ve YÖKTEZ kaydı için öğrenci taahhüdü formda yer alır." },
+      { title: "Yüksek Lisans Tez Savunma Jüri Öneri Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//Contents/sosyal_bilimler_ens/icerik-serbest/29731/2. Yüksek Lisans Tez Savunma Jüri Öneri Formu_03062026152935.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/2. (Örnek Doldurulmuş) Yüksek Lisans Tez Savunma Jüri Öneri Formu_638762445305874554.pdf", docs: [
+        "2 adet CD/DVD (tezin Word ve PDF hali)", "Tez Yayın Onay Formu",
+        "Jüri Üyelerine Tez ve Turnitin İntihal Yazılım Raporu Teslim Taahhüt Formu",
+        "Turnitin/intihal raporu (kaynakça ve alıntılar hariç en fazla %15)"
+      ], docsNote: "Yayın şartını karşılayan makale/kitap kabul belgesi bu aşamada hazır olmalıdır; tez nüshaları ve intihal raporu savunmadan önce jüri üyelerine ayrıca teslim edilir." },
+      { title: "Tez Savunma ve Tutanak Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/3. Tez Savunma ve Tutanak Formu_638784961719561537.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/3. (Örnek Doldurulmuş) Tez Savunma ve Tutanak Formu_638762445350222719.pdf", docs: [
+        "Jüri üyelerine önceden teslim edilmiş tez nüshaları ve intihal raporu",
+        "Her jüri üyesi için ayrı Tez Değerlendirme Formu", "(Sanat dallarında) Uygulamalı Sınav Tutanağı"
+      ], docsNote: "Tutanak ve ekleri, savunmadan sonra en geç 3 iş günü içinde EBYS üzerinden bölüme iletilmelidir." },
+      { title: "Yüksek Lisans İkinci (Düzeltme) Tez Savunma Sınavı Başvuru Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/4. Yüksek Lisans İkinci (Düzeltme) Tez Savunma Sınavı Başvuru Formu_638804182912832682.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/4. (Örnek Doldurulmuş) Yüksek Lisans İkinci (Düzeltme) Tez Savunma Sınavı Başvuru Formu_638762445397836842.pdf", docs: [
+        "2 adet CD/DVD (düzeltilmiş tezin Word ve PDF hali)", "Güncel Turnitin/intihal raporu (en fazla %15)"
+      ], docsNote: "Düzeltilmiş tez, ikinci savunmadan önce öğrenci tarafından jüri üyelerine ayrıca teslim edilir; jüri, ilk savunmadaki ile aynı olmalıdır." },
+      { title: "Yüksek Lisans Tez Konusu - Başlığı Değişikliği Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//Contents/sosyal_bilimler_ens/icerik-serbest/29731/5. Yüksek Lisans Tez Konusu - Başlığı Değişikliği Formu_16062026162722.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/5. (Örnek Doldurulmuş) Yüksek Lisans Tez Adı - Başlığı Değişikliği Formu_638762445438734971.pdf", docs: [
+        "Yeni Tez Önerisi Formu (yalnızca içerik de değişiyorsa gerekir)"
+      ], docsNote: "Sadece başlık değişiyorsa ek belge gerekmez; tezin içeriği de değişiyorsa yeni bir Tez Önerisi Formu eklenmelidir." },
+      { title: "Mezuniyet Formları", blank: "https://webadmin.selcuk.edu.tr/uploads//Contents/sosyal_bilimler_ens/icerik-serbest/29731/6. Mezuniyet Formları_03092026134321.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/6. (Örnek Doldurulmuş) Mezuniyet Formları_638877625439495397.pdf", docs: [
+        "Yüksek Lisans Tezi Kabul Formu (Form 6A)", "Özet (Form 6B) ve Abstract (Form 6C)",
+        "Mezuniyet ve İlişik Kesme Formu (Form 6D)", "Bilimsel Etik Beyan Formu (Form 6E)",
+        "2 adet Tez Veri Giriş Formu (tez.yok.gov.tr Ulusal Tez Merkezi'nden doldurup çıktı alınır, imzalanır)",
+        "2 adet CD/DVD (tezin Word ve PDF hali)", "Anabilim Dalı Tez Kontrolü Beyan Formu",
+        "1 adet A4 ebadında, kurallara uygun ciltlenmiş basılı tez (karton kapak, tek yüz baskı)", "Öğrenci kimliği"
+      ], docsNote: "Mezuniyet Dilekçe Formu, İlişik Kesme Formu, İmzalı Tez Kabul Formu ve Bilimsel Etik Formu ıslak imzalı olmalıdır; danışman, jüri üyeleri ve anabilim dalı başkanlığı ilgili bölümleri imzalar. Kütüphane İlişik Kesme formu ayrıca BAP Koordinatörlüğü ve Kütüphaneye imzalatılır." },
+      { title: "Ders Muafiyet - İntibak Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/7. Ders Muafiyet - İntibak Formu_638904988902133355.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/7. (Örnek Doldurulmuş) Ders Muafiyet - İntibak Formu_638762445525212061.pdf", docs: [
+        "Onaylı transkript (Türkçe ve İngilizce)", "Muafiyeti istenen derslerin içerik/müfredat belgesi"
+      ] },
+      { title: "Ders Ekleme - Çıkarma Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/8. Ders Ekleme - Çıkarma Formu_638784961903340939.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/8. (Örnek Doldurulmuş) Ders Ekleme - Çıkarma Formu_638762445570717152.pdf" },
+      { title: "Yüksek Lisans Seminer Değerlendirme Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/9. Yüksek Lisans Seminer Değerlendirme Formu_639021836563507281.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/9. (Örnek Doldurulmuş) Yüksek Lisans Seminer Değerlendirme Formu_638762445618229196.pdf", docs: [
+        "Seminerin dijital (Word) hali"
+      ], docsNote: "Seminer, enstitünün tez yazım kurallarına uygun hazırlanmalıdır; form ve dijital dosya birlikte bölüm başkanlığına teslim edilir." },
+      { title: "Öğrenci Danışman Değişiklik Talep Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/10. Öğrenci Danışman Değişiklik Talep Formu_638760988770102983.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/10. (Örnek Doldurulmuş) Öğrenci Danışman Değişiklik Talep Formu_638762445655755164.pdf" },
+      { title: "Seminer Toplantı Tarihi Başvuru Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41720/11. Seminer Toplantı Tarihi Başvuru Formu_638980391973181597.docx", sample: null },
+      { title: "Tezli Yüksek Lisans Kesin Kayıt Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41700/2. Tezli Yüksek Lisans Kesin Kayıt Formu_638907814496170608.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41700/2. (Örnek Doldurulmuş) Tezli Yüksek Lisans Kesin Kayıt Formu_638760994118883572.pdf" }
+    ];
+    function renderYlForms() {
+      const list = document.getElementById("ylFormsList");
+      if (!list) return;
+      list.innerHTML = ylFormsData.map((f, i) => `
+        <div class="doc-form-row" id="form-yl-${i}">
+          <div class="doc-form-row-title"><span class="doc-num">${i + 1}</span> ${f.title}</div>
+          <div class="doc-form-actions">
+            ${f.blank ? `<a class="doc-form-btn word" href="${f.blank}" target="_blank" rel="noopener"><i data-lucide="file-text" style="width:14px;height:14px;"></i> Word</a>` : ""}
+            ${f.sample ? `<a class="doc-form-btn pdf" href="${f.sample}" target="_blank" rel="noopener"><i data-lucide="file-check" style="width:14px;height:14px;"></i> Örnek PDF</a>` : ""}
+          </div>
+          ${(f.docs || f.docsNote) ? `
+          <details style="flex-basis: 100%; width: 100%;">
+            <summary class="doc-form-docs-toggle"><i data-lucide="paperclip" style="width:12px;height:12px;"></i> Yanında Ne Getirmeli? <i data-lucide="chevron-down" class="docs-chev"></i></summary>
+            <div class="doc-form-docs-body">
+              ${f.docs ? `<ul>${f.docs.map(d => `<li>${d}</li>`).join("")}</ul>` : ""}
+              ${f.docsNote ? `<div class="docs-note">${f.docsNote}</div>` : ""}
+            </div>
+          </details>` : ""}
+        </div>`).join("");
+      safeCreateIcons();
+    }
+
+    /* ============ DOKTORA FORMLARI (gerçek bağlantılar) ============ */
+    const doktoraFormsData = [
+      { title: "Doktora Yeterlik Başvuru Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/1. Doktora Yeterlik Başvuru Formu_638983658964785543.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/1. (Örnek Doldurulmuş) Doktora Yeterlik Başvuru Formu_638762632502511436.pdf", docs: [
+        "Doktora Form 1A (Jüri/Komite Öneri Formu)"
+      ], docsNote: "Form 1 ve Form 1A birlikte, anabilim dalı kurul kararıyla EBYS üzerinden enstitüye gönderilir." },
+      { title: "Doktora Yeterlik Sınavı Jüri Tutanak Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/2. Doktora Yeterlik Sınavı Jüri Tutanak Formu_638774750867082902.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/2. (Örnek Doldurulmuş) Doktora Yeterlik Sınavı Jüri Tutanak Formu_638762632547229316.pdf", docs: [
+        "Doktora Form 2A ve 2B (yazılı ve sözlü sınav evrakları — her jüri üyesi için ayrı, toplam 10 belge)"
+      ], docsNote: "Başarı eşiği her jüri üyesi için en az 73 puandır; belgeler sınavdan sonra en geç 3 iş günü içinde EBYS üzerinden enstitüye iletilir." },
+      { title: "Tez İzleme Komitesi Kurulması - Değiştirilmesi Öneri Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/3. Tez İzleme Komitesi Kurulması - Değiştirilmesi Öneri Formu_638784962746218697.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/3. (Örnek Doldurulmuş) Tez İzleme Komitesi Kurulması - Değiştirilmesi Öneri Formu_638762632588859379.pdf" },
+      { title: "Tez İzleme Komitesi Toplantı Başvuru Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/4. Tez İzleme Komitesi Toplantı Başvuru Formu_638980392693308903.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/4. (Örnek Doldurulmuş) Tez İzleme Komitesi Toplantı Başvuru Formu_638762632642728670.pdf", docsNote: "Toplantı tarihi, dönem ayları (Mart-Haziran / Eylül-Aralık) içinde ve başvurudan en az 15 gün sonrasına ayarlanmalıdır." },
+      { title: "Tez İzleme Komitesi (TİK) Tez İzleme Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//Contents/sosyal_bilimler_ens/icerik-serbest/29732/4a. Tez İzleme Komitesi (TİK) Tez İzleme Formu_16062026162537.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/4a. (Örnek Doldurulmuş) Tez İzleme Komitesi (TİK) Tez İzleme Formu_638762632689509444.pdf", docs: [
+        "Öğrenci Tez İzleme Komite Raporu (Doktora Form 4A)"
+      ], docsNote: "Değerlendirme dışındaki tüm alanlar bilgisayar ortamında doldurulur; başarısız değerlendirmede yazılı gerekçe eklenir." },
+      { title: "Doktora Tez Önerisi Savunma Tutanak Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/5. Doktora Tez Önerisi Savunma Tutanak Formu_638956034609440496.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/5. (Örnek Doldurulmuş) Doktora Tez Önerisi Savunma Tutanak Formu_638762632740491128.pdf", docs: [
+        "Taahhütname (Doktora Form 5A)", "Tez önerisi örneği (Doktora Form 5B)"
+      ], docsNote: "Tez önerisi savunması TİK'in sıfırıncı toplantısı sayılır; Konya dışındaki üyeler yazılı görüşünü e-posta ile iletip tutanağa ekleyebilir." },
+      { title: "Doktora Tez Savunma Jüri Öneri Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/6. Doktora Tez Savunma Jüri Öneri Formu_639026037671593499.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/6. (Örnek Doldurulmuş) Doktora Tez Savunma Jüri Öneri Formu_638762632784560538.pdf", docs: [
+        "Tez CD/DVD (Word ve PDF hali)", "Yayın Onay Formu (Doktora Form 6A)",
+        "Jüri Teslim Taahhüt Formu (Doktora Form 6B)", "Turnitin/intihal raporu (kaynakça ve alıntılar hariç en fazla %15)"
+      ], docsNote: "Tez nüshaları ve intihal raporu, savunmadan önce jüri üyelerine ayrıca teslim edilir." },
+      { title: "Tez Savunma Sınavı Tutanak Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/7. Tez Savunma Sınavı Tutanak Formu_638838671844327419.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/7. (Örnek Doldurulmuş) Tez Savunma Sınavı Tutanak Formu_638762632829599436.pdf", docs: [
+        "Jüri Üyelerine Tez ve Turnitin İntihal Yazılım Raporu Teslim Formu",
+        "Her jüri üyesi için ayrı Tez Değerlendirme Formu", "(Sanat dallarında) Uygulamalı Sınav Tutanağı"
+      ], docsNote: "Jüri üyeleri değerlendirme formunun her sayfasını imzalar; belgeler 3 iş günü içinde EBYS ile enstitüye iletilir." },
+      { title: "Doktora İkinci (Düzeltme) Tez Savunma Sınavı Başvuru Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/8. Doktora İkinci (Düzeltme) Tez Savunma Sınavı Başvuru Formu_638993322491975074.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/8. (Örnek Doldurulmuş) Doktora İkinci (Düzeltme) Tez Savunma Sınavı Başvuru Formu_638762632875199434.pdf", docs: [
+        "Tez CD/DVD (Word ve PDF hali)", "Turnitin İntihal Yazılım Raporu Teslim Taahhüt Formu (Form 8A)",
+        "Güncel intihal raporu (en fazla %15)"
+      ], docsNote: "İkinci savunmada, ilk savunmadaki jüri aynen görev yapar." },
+      { title: "Doktora Tez Konusu - Başlığı Değişikliği Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/9. Doktora Tez Konusu - Başlığı Değişikliği Formu_638820519617959016.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/9. (Örnek Doldurulmuş) Doktora Tez Adı - Başlığı Değişikliği Formu_638762632918296701.pdf", docs: [
+        "Yeni Tez Önerisi Formu (yalnızca içerik de değişiyorsa gerekir)"
+      ], docsNote: "Sadece başlık değişiyorsa ek belge gerekmez; savunma jürisinin önerisiyle yapılan değişikliklerde jüri üyelerinin de imzası istenir." },
+      { title: "Mezuniyet Formları", blank: "https://webadmin.selcuk.edu.tr/uploads//Contents/sosyal_bilimler_ens/icerik-serbest/29732/10. Mezuniyet Formları_03092026134418.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/10. (Örnek Doldurulmuş) Mezuniyet Formları_638877629028753804.pdf", docs: [
+        "Doktora Tezi Kabul Formu", "Özet ve Abstract", "Mezuniyet ve İlişik Kesme Formu", "Bilimsel Etik Beyan Formu",
+        "2 adet Tez Veri Giriş Formu (tez.yok.gov.tr Ulusal Tez Merkezi'nden doldurup çıktı alınır, imzalanır)",
+        "2 adet CD/DVD (tezin Word ve PDF hali)", "Anabilim Dalı Tez Kontrolü Beyan Formu",
+        "1 adet A4 ebadında, kurallara uygun ciltlenmiş basılı tez (karton kapak, tek yüz baskı)", "Öğrenci kimliği"
+      ], docsNote: "Mezuniyet Dilekçe Formu, İlişik Kesme Formu, İmzalı Tez Kabul Formu ve Bilimsel Etik Formu ıslak imzalı olmalıdır; danışman, jüri üyeleri ve anabilim dalı başkanlığı ilgili bölümleri imzalar. Kütüphane İlişik Kesme formu ayrıca BAP Koordinatörlüğü ve Kütüphaneye imzalatılır." },
+      { title: "Ders Muafiyet - İntibak Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/11. Ders Muafiyet - İntibak Formu_639058881719748375.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/11. (Örnek Doldurulmuş) Ders Muafiyet - İntibak Formu_639058881667112335.pdf", docs: [
+        "Onaylı transkript (Türkçe ve İngilizce)", "Muafiyeti istenen derslerin içerik/müfredat belgesi"
+      ] },
+      { title: "Ders Ekleme - Çıkarma Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/12. Ders Ekleme - Çıkarma Formu_638784963007573357.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/12. (Örnek Doldurulmuş) Ders Ekleme - Çıkarma Formu_638762633042871144.pdf" },
+      { title: "Doktora Seminer Değerlendirme Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/13. Doktora Seminer Değerlendirme Formu_639021836874603684.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/13. Doktora Seminer Değerlendirme Formu_638762633088966782.pdf", docs: [
+        "Seminerin dijital (Word) hali"
+      ], docsNote: "Seminer, enstitünün tez yazım kurallarına uygun hazırlanmalıdır; form ve dijital dosya birlikte bölüm başkanlığına teslim edilir." },
+      { title: "Öğrenci Danışman Değişiklik Talep Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/14. Öğrenci Danışman Değişiklik Talep Formu_638760989916457935.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/14. (Örnek Doldurulmuş) Öğrenci Danışman Değişiklik Talep Formu_638762633127473652.pdf" },
+      { title: "Seminer Toplantı Tarihi Başvuru Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41730/15. Seminer Toplantı Tarihi Başvuru Formu_638980392740234360.docx", sample: null },
+      { title: "Doktora Kesin Kayıt Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41700/4. Doktora Kesin Kayıt Formu_638907814592575620.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41700/4. (Örnek Doldurulmuş) Doktora Kesin Kayıt Formu_638760994207756855.pdf" }
+    ];
+    function renderDoktoraForms() {
+      const list = document.getElementById("doktoraFormsList");
+      if (!list) return;
+      list.innerHTML = doktoraFormsData.map((f, i) => `
+        <div class="doc-form-row" id="form-doktora-${i}">
+          <div class="doc-form-row-title"><span class="doc-num">${i + 1}</span> ${f.title}</div>
+          <div class="doc-form-actions">
+            ${f.blank ? `<a class="doc-form-btn word" href="${f.blank}" target="_blank" rel="noopener"><i data-lucide="file-text" style="width:14px;height:14px;"></i> Word</a>` : ""}
+            ${f.sample ? `<a class="doc-form-btn pdf" href="${f.sample}" target="_blank" rel="noopener"><i data-lucide="file-check" style="width:14px;height:14px;"></i> Örnek PDF</a>` : ""}
+          </div>
+          ${(f.docs || f.docsNote) ? `
+          <details style="flex-basis: 100%; width: 100%;">
+            <summary class="doc-form-docs-toggle"><i data-lucide="paperclip" style="width:12px;height:12px;"></i> Yanında Ne Getirmeli? <i data-lucide="chevron-down" class="docs-chev"></i></summary>
+            <div class="doc-form-docs-body">
+              ${f.docs ? `<ul>${f.docs.map(d => `<li>${d}</li>`).join("")}</ul>` : ""}
+              ${f.docsNote ? `<div class="docs-note">${f.docsNote}</div>` : ""}
+            </div>
+          </details>` : ""}
+        </div>`).join("");
+      safeCreateIcons();
+    }
+
+    /* ============ GENEL FORMLAR (YL ve Doktora ortak, gerçek bağlantılar) ============ */
+    const genelFormsData = [
+      { title: "Öğrenci Dilekçe Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/2. Öğrenci Dilekçe Formu_638760986946174573.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/2. (Örnek Doldurulmuş) Öğrenci Dilekçe Formu_638762415872685920.pdf" },
+      { title: "Kayıt Dondurma Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/3. Kayıt Dondurma Formu_638760987009230634.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/3. (Örnek Doldurulmuş) Kayıt Dondurma Formu_638762415916941402.pdf" },
+      { title: "Yatay Geçiş Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/1. Yatay Geçiş Formu_638784960569464067.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/1. (Örnek Doldurulmuş) Yatay Geçiş Formu_638762415826745682.pdf" },
+      { title: "Kayıt Sildirme Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/4. Kayıt Sildirme Formu_638784960612963050.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/4. (Örnek Doldurulmuş) Kayıt Sildirme Formu_638762415963067968.pdf" },
+      { title: "Ek Süre Talep Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//Contents/sosyal_bilimler_ens/icerik-serbest/29730/10. Ek Süre Talep Formu_22062026155720.docx", sample: null },
+      { title: "Ücret İade Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/7. Ücret İade Formu_638760987180281629.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/7. (Örnek Doldurulmuş) Ücret İade Formu_638762416086458544.pdf" },
+      { title: "Askerlik Tehir Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/8. Askerlik Tehir Formu_638760987244859998.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/8. (Örnek Doldurulmuş) Askerlik Tehir Formu_638762416125178270.pdf" },
+      { title: "Askerlik Tehir İptal Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/9. Askerlik Tehir İptal Formu_638760987291719230.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/9. (Örnek Doldurulmuş)  Askerlik Tehir İptal Formu_638762416162883081.pdf" },
+      { title: "Engelli Öğrenci Kişisel Bilgi Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/6. Engelli Öğrenci Kişisel Bilgi Formu_638760987136518083.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/6. (Örnek Doldurulmuş) Engelli Öğrenci Kişisel Bilgi Formu_638762416045031356.pdf" },
+      { title: "Pasaport ve Yurt Dışına Çıkış Harcı Muafiyet Başvuru Formu", blank: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/5. Pasaport ve Yurt Dışına Çıkış Harcı Muafiyet Başvuru Formu_638784960657950438.docx", sample: "https://webadmin.selcuk.edu.tr/uploads//contents/sosyal_bilimler_ens/icerik/41710/5. (Örnek Doldurulmuş) Pasaport ve Yurt Dışına Çıkış Harcı Muafiyet Başvuru Formu_638762416002900170.pdf" }
+    ];
+    function renderGenelForms() {
+      const list = document.getElementById("genelFormsList");
+      if (!list) return;
+      list.innerHTML = genelFormsData.map((f, i) => `
+        <div class="doc-form-row" id="form-genel-${i}">
+          <div class="doc-form-row-title"><span class="doc-num">${i + 1}</span> ${f.title}</div>
+          <div class="doc-form-actions">
+            ${f.blank ? `<a class="doc-form-btn word" href="${f.blank}" target="_blank" rel="noopener"><i data-lucide="file-text" style="width:14px;height:14px;"></i> Word</a>` : ""}
+            ${f.sample ? `<a class="doc-form-btn pdf" href="${f.sample}" target="_blank" rel="noopener"><i data-lucide="file-check" style="width:14px;height:14px;"></i> Örnek PDF</a>` : ""}
+          </div>
+        </div>`).join("");
+      safeCreateIcons();
+    }
+
+    // Süreç diyagramındaki form rozetleri, dosyayı doğrudan açmak yerine Formlar bölümündeki
+    // ilgili satıra kaydırır ve kısaca vurgular — tek doğru kaynak (Formlar listesi) korunur.
+    function scrollToForm(tab, idx) {
+      const row = document.getElementById(`form-${tab}-${idx}`);
+      if (!row) return;
+      row.scrollIntoView({ behavior: "smooth", block: "center" });
+      row.classList.remove("highlight-pulse");
+      void row.offsetWidth; // animasyonu yeniden tetiklemek için reflow
+      row.classList.add("highlight-pulse");
+    }
+
+    function filterForms(tab) {
+      const input = document.getElementById("formSearchInput-" + tab);
+      const term = (input ? input.value : "").toLocaleLowerCase("tr");
+      const listIds = { yl: "ylFormsList", doktora: "doktoraFormsList", genel: "genelFormsList" };
+      const container = document.getElementById(listIds[tab]);
+      const emptyState = document.getElementById("formEmptyState-" + tab);
+      if (!container) return;
+      let visibleCount = 0;
+      container.querySelectorAll(".doc-form-row").forEach(row => {
+        const titleEl = row.querySelector(".doc-form-row-title");
+        const title = titleEl ? titleEl.textContent.toLocaleLowerCase("tr") : "";
+        const match = !term || title.includes(term);
+        row.style.display = match ? "" : "none";
+        if (match) visibleCount++;
+      });
+      if (emptyState) emptyState.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    /* ============ SSS ============ */
+    const ylFaqData = [
+      { cat: "Kabul & Kayıt", q: "Tezli yüksek lisansa nasıl kabul edilirim?", a: "Lisans mezuniyet ağırlıklı not ortalamanız, ALES puanınızın %50'si, lisans not ortalamanızın %25'i ve yazılı bilim sınavı notunun %25'i toplanarak başarı puanınız hesaplanır ve kontenjan dahilinde sıralanır. Yazılı sınavdan en az 50,00 almak şarttır (Madde 25)." },
+      { cat: "Ders & Danışman", q: "Bir dönemde en fazla kaç ders/kredi alabilirim?", a: "Bir öğretim üyesi bir yarıyılda en fazla üç ders veya dokuz kredilik ders açabilir; bir öğrenci de aynı öğretim üyesinden dokuz kredi ile sınırlıdır (Madde 17/1)." },
+      { cat: "Ders & Danışman", q: "Başka bir üniversiteden ders alabilir miyim?", a: "Danışman ve EAB/anasanat dalı kurulunun önerisi ile enstitü yönetim kurulunun kararı şartıyla, bir programda en fazla iki ders başka kurumlardan seçilebilir (Madde 17/4)." },
+      { cat: "Ders & Danışman", q: "Araştırma ve yayın etiği dersini almak zorunda mıyım?", a: "Evet, lisansüstü eğitim boyunca Bilimsel Araştırma Teknikleri ile Araştırma ve Yayın Etiği konularını içeren en az bir ders alıp başarmak zorunludur (Madde 17/7)." },
+      { cat: "Sınavlar & Notlar", q: "DD notu geçer mi?", a: "Hayır. DD (1,00 puan) başarısız bir nottur; bir dersten başarılı sayılmak için en az CB almak gerekir (Madde 20/3-4)." },
+      { cat: "Sınavlar & Notlar", q: "Final ve bütünleme sınavına girebilmek için devam şartı nedir?", a: "Teorik derslerin %70'ine, uygulama ve laboratuvar çalışmalarının %80'ine devam etmiş olmak gerekir (Madde 20/2)." },
+      { cat: "Sınavlar & Notlar", q: "Sınav notuma nasıl itiraz ederim?", a: "Notun otomasyona giriş tarihinden itibaren en geç 3 iş günü içinde enstitü müdürlüğüne dilekçeyle başvurursunuz (Madde 22)." },
+      { cat: "Süre & Ücret", q: "Azami süreyi doldurursam ne olur?", a: "Azami süre (6 yarıyıl) sonunda derslerini/seminerini tamamlayamayan, tez önerisinde bulunmayan veya tez çalışmasında başarısız olan öğrencinin programla ilişiği kesilir (Madde 27/2)." },
+      { cat: "Süre & Ücret", q: "Hangi yarıyıldan itibaren öğrenim ücreti öderim?", a: "Programı 4 yarıyılda bitiremeyenler, 5. yarıyıldan itibaren katkı payı/öğrenim ücreti öder (Madde 27/4)." },
+      { cat: "Formlar", q: "Formları nereden indirebilirim?", a: "Bu sayfanın \"Formlar\" bölümünde, her belge için hem boş (Word) hem de örnek doldurulmuş (PDF) sürüm bağlantısı bulunur." },
+      { cat: "Bu Portal Hakkında", q: "Bu sayfadaki bilgiler resmî mi?", a: "Bu sayfa öğrencilere yardımcı olmak amacıyla Selçuk Üniversitesi Lisansüstü Eğitim ve Öğretim Yönetmeliği esas alınarak hazırlanmış gayriresmî bir kılavuzdur. Güncel ve bağlayıcı bilgi için enstitü otomasyon sistemi ve EAB/anasanat dalı başkanlığı esastır." }
+    ];
+    const doktoraFaqData = [
+      { cat: "Kabul & Kayıt", q: "Doktora programına hangi şartlarla başvurabilirim?", a: "Tezli yüksek lisans derecesine sahip olmak, başvurulan programın puan türünde en az 55 ALES puanı ve Senatoca kabul edilen bir yabancı dil sınavından en az 55 puan almış olmak gerekir (Madde 40)." },
+      { cat: "Ders & Danışman", q: "Bir dönemde en fazla kaç ders/kredi alabilirim?", a: "Bir öğretim üyesi bir yarıyılda en fazla üç ders veya dokuz kredilik ders açabilir; bir öğrenci de aynı öğretim üyesinden dokuz kredi ile sınırlıdır (Madde 17/1)." },
+      { cat: "Ders & Danışman", q: "Başka bir üniversiteden ders alabilir miyim?", a: "Danışman ve EAB/anasanat dalı kurulunun önerisi ile enstitü yönetim kurulunun kararı şartıyla, bir programda en fazla iki ders başka kurumlardan seçilebilir (Madde 17/4)." },
+      { cat: "Doktora Süreci", q: "Yeterlik sınavını kaçırırsam ne olur?", a: "Geçerli bir mazereti olmaksızın belirlenen yarıyılda yeterlik sınavına girmeyen öğrenci o sınavdan başarısız sayılır. Takip eden dönemde de girmezse ikinci kez başarısız sayılarak programla ilişiği kesilir (Madde 43/1-a)." },
+      { cat: "Doktora Süreci", q: "TİK raporumu sunamazsam ne olur?", a: "Belirtilen dönemde raporunu sunmayan öğrenci o dönemki TİK raporundan başarısız sayılır. Üst üste iki kez veya aralıklı üç kez başarısız olan öğrencinin programla ilişiği kesilir (Madde 45/5)." },
+      { cat: "Sınavlar & Notlar", q: "DD notu geçer mi?", a: "Hayır. DD (1,00 puan) başarısız bir nottur; doktorada bir dersten başarılı sayılmak için en az BB almak gerekir (Madde 20/3-4)." },
+      { cat: "Sınavlar & Notlar", q: "Sınav notuma nasıl itiraz ederim?", a: "Notun otomasyona giriş tarihinden itibaren en geç 3 iş günü içinde enstitü müdürlüğüne dilekçeyle başvurursunuz (Madde 22)." },
+      { cat: "Süre & Ücret", q: "Azami süreyi doldurursam ne olur?", a: "Azami süre (12 yarıyıl) sonunda derslerini/seminerini tamamlayamayan, yeterlikte/tez önerisinde başarısız olan veya tez savunmasına girmeyen öğrencinin programla ilişiği kesilir (Madde 42/2)." },
+      { cat: "Süre & Ücret", q: "Hangi yarıyıldan itibaren öğrenim ücreti öderim?", a: "Programı 8 yarıyılda bitiremeyenler, 9. yarıyıldan itibaren katkı payı/öğrenim ücreti öder (Madde 42/4)." },
+      { cat: "Bu Portal Hakkında", q: "Bu sayfadaki bilgiler resmî mi?", a: "Bu sayfa öğrencilere yardımcı olmak amacıyla Selçuk Üniversitesi Lisansüstü Eğitim ve Öğretim Yönetmeliği esas alınarak hazırlanmış gayriresmî bir kılavuzdur. Güncel ve bağlayıcı bilgi için enstitü otomasyon sistemi ve EAB/anasanat dalı başkanlığı esastır." }
+    ];
+
+    function renderFaq(view, filterText) {
+      const data = view === "yl" ? ylFaqData : doktoraFaqData;
+      const container = document.getElementById("faqList-" + view);
+      const emptyState = document.getElementById("faqEmptyState-" + view);
+      if (!container) return;
+      const term = (filterText || "").toLocaleLowerCase("tr");
+      let lastCat = null, html = "", matchCount = 0;
+      data.forEach(item => {
+        const haystack = (item.q + " " + item.a).toLocaleLowerCase("tr");
+        if (term && !haystack.includes(term)) return;
+        matchCount++;
+        if (item.cat !== lastCat) { html += `<div class="faq-category-label">${item.cat}</div>`; lastCat = item.cat; }
+        html += `<details class="faq-item"><summary>${item.q}</summary><div class="faq-answer">${item.a}</div></details>`;
+      });
+      container.innerHTML = html;
+      if (emptyState) emptyState.style.display = matchCount === 0 ? "block" : "none";
+    }
+    function filterFaq(view) {
+      const input = document.getElementById("faqSearchInput-" + view);
+      renderFaq(view, input ? input.value : "");
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderSubnav();
+      renderNotSistemi("notSistemiBody-yl");
+      renderNotSistemi("notSistemiBody-doktora");
+      renderYlForms();
+      renderDoktoraForms();
+      renderGenelForms();
+      renderFaq("yl");
+      renderFaq("doktora");
+      renderTimelineCards();
+      updateCalSpotlight();
+      initGradSurecim();
+      initTeslimChecklist();
+      safeCreateIcons();
+      setupScrollSpy();
+      initFromHash();
+    });
+  </script>
+</body>
+</html>
