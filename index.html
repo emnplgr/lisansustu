@@ -67,9 +67,9 @@
 
     /* Sticky subnav */
     .sticky-subnav { position: sticky; top: 66px; z-index: 80; background: var(--header-bg); backdrop-filter: blur(10px); border-bottom: 1px solid var(--slate-200); box-shadow: 0 4px 12px -4px rgba(15,23,42,0.04); }
-    .subnav-inner { max-width: 1200px; margin: 0 auto; padding: 0.6rem 1.5rem; display: flex; gap: 0.4rem; overflow-x: auto; justify-content: center; scrollbar-width: none; }
+    .subnav-inner { max-width: 1200px; margin: 0 auto; padding: 0.6rem 1.5rem; display: flex; flex-wrap: nowrap; gap: 0.2rem; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
     .subnav-inner::-webkit-scrollbar { display: none; }
-    .subnav-btn { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 0.5rem 0.9rem; border-radius: 999px; border: 1px solid transparent; background: transparent; color: var(--slate-600); font-size: 0.82rem; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.15s ease; }
+    .subnav-btn { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; flex: 0 0 auto; padding: 0.4rem 0.65rem; border-radius: 999px; border: 1px solid transparent; background: transparent; color: var(--slate-600); font-size: 0.78rem; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.15s ease; }
     .subnav-btn:hover { background: var(--slate-100); color: var(--slate-800); }
     .subnav-btn.active { background: var(--primary-light); color: var(--primary); border-color: rgba(21,71,52,0.2); }
 
@@ -102,6 +102,59 @@
     main { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
     .tab-view-content { display: none; }
     .tab-view-content.active { display: block; }
+
+    /* GENEL ARAMA ÇUBUĞU */
+    .global-search-wrap { position: relative; z-index: 20; max-width: 640px; margin: 0 auto 2.5rem; }
+    .global-search-box {
+      display: flex; align-items: center; gap: 10px; background: var(--white);
+      border: 1px solid var(--slate-200); border-radius: 999px; padding: 0.85rem 1.35rem;
+      box-shadow: var(--shadow-md); transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .global-search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft), var(--shadow-md); }
+    .global-search-box .search-icon { color: var(--accent); flex-shrink: 0; }
+    .global-search-box input { flex: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 0.94rem; color: var(--slate-800); }
+    .global-search-box input::placeholder { color: var(--slate-400); }
+    .global-search-clear-btn {
+      border: none; background: var(--slate-100); color: var(--slate-600);
+      width: 24px; height: 24px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .global-search-results {
+      display: none; position: absolute; left: 0; right: 0; top: calc(100% + 8px);
+      background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md); max-height: 60vh; overflow-y: auto; padding: 0.5rem 0;
+    }
+    .global-search-results.open { display: block; }
+    .gsr-group-label { padding: 0.65rem 1.1rem 0.35rem; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--slate-500); }
+    .gsr-item { display: flex; align-items: flex-start; gap: 11px; padding: 0.6rem 1.1rem; cursor: pointer; transition: background 0.15s ease; }
+    .gsr-item:hover { background: var(--primary-light); }
+    .gsr-item-icon { width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; }
+    .gsr-item-title { font-weight: 700; font-size: 0.87rem; color: var(--slate-800); }
+    .gsr-item-sub { font-size: 0.75rem; color: var(--slate-500); margin-top: 1px; }
+    .gsr-empty { text-align: center; color: var(--slate-500); font-size: 0.85rem; padding: 1.5rem 1rem; }
+    @keyframes searchPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(175,131,48,0.45); } 50% { box-shadow: 0 0 0 8px rgba(175,131,48,0); } }
+    .search-jump-highlight { animation: searchPulse 1.1s ease-out 2; border-color: var(--accent) !important; }
+
+    /* HATA/EKSİK BİLDİR */
+    .report-issue-bar { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 2rem; }
+    .report-issue-card {
+      display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap;
+      background: rgba(165,50,31,0.06); border: 1.5px solid rgba(165,50,31,0.3);
+      border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
+    }
+    .report-issue-icon {
+      width: 46px; height: 46px; border-radius: 12px; background: rgba(165,50,31,0.14); color: var(--danger);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .report-issue-text { flex: 1 1 260px; }
+    .report-issue-text h4 { font-size: 1rem; font-weight: 800; color: var(--slate-900); margin-bottom: 2px; }
+    .report-issue-text p { font-size: 0.84rem; color: var(--slate-600); }
+    .report-issue-link {
+      display: inline-flex; align-items: center; gap: 7px; font-size: 0.85rem; font-weight: 800;
+      color: #fff; text-decoration: none; padding: 0.65rem 1.3rem; border-radius: 999px;
+      background: var(--danger); flex-shrink: 0; transition: all 0.15s ease; box-shadow: var(--shadow-sm);
+    }
+    .report-issue-link:hover { filter: brightness(1.1); box-shadow: var(--shadow-md); }
 
     .section-title { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.5rem; scroll-margin-top: 130px; flex-wrap: wrap; }
     .section-title h3 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; font-weight: 600; color: var(--slate-900); }
@@ -248,7 +301,9 @@
     /* TİK / Yeterlik pencere göstergeleri */
 
     /* Faydalı Bağlantılar */
-    .useful-link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.1rem; }
+    .useful-link-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    @media(max-width: 700px) { .useful-link-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width: 460px) { .useful-link-grid { grid-template-columns: 1fr; } }
     .useful-link-card {
       display: flex; align-items: flex-start; gap: 12px; background: var(--white); border: 1px solid var(--slate-200);
       border-radius: var(--radius-md); padding: 1.1rem 1.25rem; text-decoration: none; transition: box-shadow 0.15s ease, border-color 0.15s ease;
@@ -368,6 +423,25 @@
   </section>
 
   <main>
+    <!-- GENEL ARAMA -->
+    <div class="global-search-wrap">
+      <div class="global-search-box">
+        <i data-lucide="search" class="search-icon" style="width:19px;height:19px;"></i>
+        <input
+          type="text"
+          id="globalSearchInput"
+          placeholder="Ara... (örn: 'yeterlik', 'TİK', 'danışman değişikliği', 'kayıt dondurma')"
+          autocomplete="off"
+          oninput="handleGlobalSearch(this.value)"
+          onfocus="handleGlobalSearch(this.value)"
+        />
+        <button type="button" id="globalSearchClearBtn" class="global-search-clear-btn" onclick="clearGlobalSearch()" style="display:none;" aria-label="Aramayı temizle">
+          <i data-lucide="x" style="width:16px;height:16px;"></i>
+        </button>
+      </div>
+      <div class="global-search-results" id="globalSearchResults"></div>
+    </div>
+
     <!-- ================= AKADEMİK TAKVİM (paylaşılan, her iki sekmeden erişilir) ================= -->
     <section class="block" id="akademik-takvim">
       <div class="section-title"><span class="section-badge">Resmî takvim</span><h3>2026 - 2027 Lisansüstü Akademik Takvimi</h3></div>
@@ -1002,6 +1076,19 @@
   </main>
 
   <div id="surecimPrintReport" class="print-only"></div>
+
+  <div class="report-issue-bar">
+    <div class="report-issue-card">
+      <div class="report-issue-icon"><i data-lucide="flag" style="width:22px;height:22px;"></i></div>
+      <div class="report-issue-text">
+        <h4>Portalda bir hata veya eksik mi gördünüz?</h4>
+        <p>Yanlış bir bilgi, çalışmayan bir bağlantı ya da eksik bir bölüm fark ederseniz bize bildirin.</p>
+      </div>
+      <a class="report-issue-link" href="mailto:m.eminpilgir@gmail.com?subject=Lisans%C3%BCst%C3%BC%20Portal%20-%20Hata%2FEksik%20Bildirimi&body=Merhaba%2C%0A%0AA%C5%9Fa%C4%9F%C4%B1daki%20b%C3%B6l%C3%BCmde%20bir%20hata%2Feksik%20fark%20ettim%3A%0A%0A" target="_blank" rel="noopener">
+        <i data-lucide="send" style="width:14px;height:14px;"></i> Bildir
+      </a>
+    </div>
+  </div>
 
   <footer>
     <p>© Selçuk Üniversitesi Sosyal Bilimler Enstitüsü · Felsefe Anabilim Dalı Lisansüstü Portalı</p>
@@ -1798,12 +1885,12 @@
       if (!container) return;
       const term = (filterText || "").toLocaleLowerCase("tr");
       let lastCat = null, html = "", matchCount = 0;
-      data.forEach(item => {
+      data.forEach((item, idx) => {
         const haystack = (item.q + " " + item.a).toLocaleLowerCase("tr");
         if (term && !haystack.includes(term)) return;
         matchCount++;
         if (item.cat !== lastCat) { html += `<div class="faq-category-label">${item.cat}</div>`; lastCat = item.cat; }
-        html += `<details class="faq-item"><summary>${item.q}</summary><div class="faq-answer">${item.a}</div></details>`;
+        html += `<details class="faq-item" id="faq-${view}-${idx}"><summary>${item.q}</summary><div class="faq-answer">${item.a}</div></details>`;
       });
       container.innerHTML = html;
       if (emptyState) emptyState.style.display = matchCount === 0 ? "block" : "none";
@@ -1811,6 +1898,194 @@
     function filterFaq(view) {
       const input = document.getElementById("faqSearchInput-" + view);
       renderFaq(view, input ? input.value : "");
+    }
+
+    /* ============ GENEL ARAMA ============ */
+    // Bu üç bölüm her iki sekmeden de erişilebilir olduğu ve DOM'da sekme kapsayıcılarının
+    // dışında bulunduğu için, aramadan bu bölümlere atlarken sekme değişimi gerekmez.
+    const sharedSectionIds = new Set(["akademik-takvim", "genel-formlar", "faydali-baglantilar"]);
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    function scrollToSectionId(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.classList.remove("search-jump-highlight");
+      void el.offsetWidth; // animasyonu yeniden tetiklemek için reflow
+      el.classList.add("search-jump-highlight");
+    }
+
+    function jumpToSection(view, targetId) {
+      clearGlobalSearch();
+      if (!sharedSectionIds.has(targetId) && currentView !== view) {
+        switchMainView(view);
+        setTimeout(() => scrollToSectionId(targetId), 180);
+      } else {
+        scrollToSectionId(targetId);
+      }
+    }
+
+    function jumpToFormResult(view, tab, idx) {
+      clearGlobalSearch();
+      if (view && currentView !== view) {
+        switchMainView(view);
+        setTimeout(() => scrollToForm(tab, idx), 180);
+      } else {
+        scrollToForm(tab, idx);
+      }
+    }
+
+    function jumpToFaqResult(view, idx) {
+      clearGlobalSearch();
+      const doJump = () => {
+        const el = document.getElementById(`faq-${view}-${idx}`);
+        if (!el) return;
+        el.open = true;
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.classList.remove("search-jump-highlight");
+        void el.offsetWidth;
+        el.classList.add("search-jump-highlight");
+      };
+      if (currentView !== view) {
+        switchMainView(view);
+        setTimeout(doJump, 180);
+      } else {
+        doJump();
+      }
+    }
+
+    function jumpToCalendarEvent(sem, eventId) {
+      clearGlobalSearch();
+      activeCalFilter = "all";
+      document.querySelectorAll(".f-pill").forEach(p => p.classList.remove("active"));
+      const firstPill = document.querySelector(".f-pill");
+      if (firstPill) firstPill.classList.add("active");
+      changeSemester(sem);
+      setTimeout(() => {
+        const card = document.querySelector(`.t-card[data-event-id="${eventId}"]`);
+        if (!card) return;
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+        card.classList.remove("search-jump-highlight");
+        void card.offsetWidth;
+        card.classList.add("search-jump-highlight");
+      }, 160);
+    }
+
+    function handleGlobalSearch(rawQuery) {
+      const term = (rawQuery || "").trim().toLocaleLowerCase("tr");
+      const clearBtn = document.getElementById("globalSearchClearBtn");
+      const resultsBox = document.getElementById("globalSearchResults");
+      if (clearBtn) clearBtn.style.display = term ? "flex" : "none";
+      if (!resultsBox) return;
+      if (!term) { resultsBox.classList.remove("open"); resultsBox.innerHTML = ""; return; }
+
+      const MAX_PER_GROUP = 6;
+      let groupsHtml = "";
+      let totalMatches = 0;
+
+      // 1) Sayfa bölümleri
+      const sectionSeen = new Set();
+      const sectionMatches = [];
+      ["yl", "doktora"].forEach(view => {
+        subnavItems[view].forEach(item => {
+          if (sectionMatches.length >= MAX_PER_GROUP) return;
+          const dedupeKey = sharedSectionIds.has(item.targetId) ? item.targetId : (view + "|" + item.targetId);
+          if (sectionSeen.has(dedupeKey)) return;
+          if (!item.label.toLocaleLowerCase("tr").includes(term)) return;
+          sectionSeen.add(dedupeKey);
+          const scopeLabel = sharedSectionIds.has(item.targetId) ? "" : (view === "yl" ? "Yüksek Lisans" : "Doktora");
+          sectionMatches.push({ label: item.label, icon: item.icon, view, targetId: item.targetId, scopeLabel });
+        });
+      });
+      if (sectionMatches.length) {
+        totalMatches += sectionMatches.length;
+        groupsHtml += `<div class="gsr-group-label">Sayfa Bölümleri</div>` + sectionMatches.map(m => `
+          <div class="gsr-item" onclick="jumpToSection('${m.view}', '${m.targetId}')">
+            <div class="gsr-item-icon"><i data-lucide="${m.icon}" style="width:15px;height:15px;"></i></div>
+            <div><div class="gsr-item-title">${escapeHtml(m.label)}</div>${m.scopeLabel ? `<div class="gsr-item-sub">${m.scopeLabel}</div>` : ""}</div>
+          </div>`).join("");
+      }
+
+      // 2) Formlar
+      const formGroups = [
+        { tab: "yl", view: "yl", data: ylFormsData, label: "Yüksek Lisans Formu" },
+        { tab: "doktora", view: "doktora", data: doktoraFormsData, label: "Doktora Formu" },
+        { tab: "genel", view: null, data: genelFormsData, label: "Genel Form" }
+      ];
+      const formMatches = [];
+      formGroups.forEach(g => {
+        g.data.forEach((f, idx) => {
+          if (formMatches.length >= MAX_PER_GROUP) return;
+          if (!f.title.toLocaleLowerCase("tr").includes(term)) return;
+          formMatches.push({ title: f.title, tab: g.tab, view: g.view, idx, label: g.label });
+        });
+      });
+      if (formMatches.length) {
+        totalMatches += formMatches.length;
+        groupsHtml += `<div class="gsr-group-label">Formlar</div>` + formMatches.map(m => `
+          <div class="gsr-item" onclick="jumpToFormResult(${m.view ? `'${m.view}'` : "null"}, '${m.tab}', ${m.idx})">
+            <div class="gsr-item-icon"><i data-lucide="file-text" style="width:15px;height:15px;"></i></div>
+            <div><div class="gsr-item-title">${escapeHtml(m.title)}</div><div class="gsr-item-sub">${m.label}</div></div>
+          </div>`).join("");
+      }
+
+      // 3) SSS
+      const faqGroups = [
+        { view: "yl", data: ylFaqData, label: "Yüksek Lisans SSS" },
+        { view: "doktora", data: doktoraFaqData, label: "Doktora SSS" }
+      ];
+      const faqMatches = [];
+      faqGroups.forEach(g => {
+        g.data.forEach((item, idx) => {
+          if (faqMatches.length >= MAX_PER_GROUP) return;
+          const haystack = (item.q + " " + item.a).toLocaleLowerCase("tr");
+          if (!haystack.includes(term)) return;
+          faqMatches.push({ q: item.q, view: g.view, idx, label: g.label });
+        });
+      });
+      if (faqMatches.length) {
+        totalMatches += faqMatches.length;
+        groupsHtml += `<div class="gsr-group-label">Sık Sorulan Sorular</div>` + faqMatches.map(m => `
+          <div class="gsr-item" onclick="jumpToFaqResult('${m.view}', ${m.idx})">
+            <div class="gsr-item-icon"><i data-lucide="help-circle" style="width:15px;height:15px;"></i></div>
+            <div><div class="gsr-item-title">${escapeHtml(m.q)}</div><div class="gsr-item-sub">${m.label}</div></div>
+          </div>`).join("");
+      }
+
+      // 4) Akademik Takvim
+      const calMatches = [];
+      ["guz", "bahar"].forEach(sem => {
+        officialCalendarEvents[sem].forEach(ev => {
+          if (calMatches.length >= MAX_PER_GROUP) return;
+          const haystack = (ev.title + " " + ev.catLabel).toLocaleLowerCase("tr");
+          if (!haystack.includes(term)) return;
+          calMatches.push({ title: ev.title, dateStr: ev.dateStr, sem, id: ev.id });
+        });
+      });
+      if (calMatches.length) {
+        totalMatches += calMatches.length;
+        groupsHtml += `<div class="gsr-group-label">Akademik Takvim</div>` + calMatches.map(m => `
+          <div class="gsr-item" onclick="jumpToCalendarEvent('${m.sem}', '${m.id}')">
+            <div class="gsr-item-icon"><i data-lucide="calendar-days" style="width:15px;height:15px;"></i></div>
+            <div><div class="gsr-item-title">${escapeHtml(m.title)}</div><div class="gsr-item-sub">${escapeHtml(m.dateStr)}</div></div>
+          </div>`).join("");
+      }
+
+      resultsBox.innerHTML = totalMatches ? groupsHtml : `<div class="gsr-empty">"${escapeHtml(rawQuery)}" için sonuç bulunamadı.</div>`;
+      resultsBox.classList.add("open");
+      safeCreateIcons();
+    }
+
+    function clearGlobalSearch() {
+      const input = document.getElementById("globalSearchInput");
+      const clearBtn = document.getElementById("globalSearchClearBtn");
+      const resultsBox = document.getElementById("globalSearchResults");
+      if (input) input.value = "";
+      if (clearBtn) clearBtn.style.display = "none";
+      if (resultsBox) { resultsBox.classList.remove("open"); resultsBox.innerHTML = ""; }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -1829,6 +2104,14 @@
       safeCreateIcons();
       setupScrollSpy();
       initFromHash();
+
+      document.addEventListener("click", function (e) {
+        const wrap = document.querySelector(".global-search-wrap");
+        const resultsBox = document.getElementById("globalSearchResults");
+        if (wrap && resultsBox && !wrap.contains(e.target)) {
+          resultsBox.classList.remove("open");
+        }
+      });
     });
   </script>
 </body>
